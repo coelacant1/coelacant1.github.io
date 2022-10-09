@@ -77,7 +77,7 @@ applemusic:
   fa-icon: 'fa-music'
   
 reddit:
-  id: 'coelacant1'
+  id: 'user/Coelacant1'
   href: 'https://www.reddit.com/'
   title: 'Reddit'
   fa-icon: 'fa-reddit'
