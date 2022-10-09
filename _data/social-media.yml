@@ -1,17 +1,89 @@
-email:
-  id: 'coelacannot@gmail.com'
-  href: 'mailto:'
-  title: 'Email'
-  fa-icon: 'fa-envelope-square'
-
 twitter:
   id: 'coelacant1'
   href: 'https://www.twitter.com/'
   title: 'Twitter'
-  fa-icon: 'fa-twitter-square'
+  fa-icon: 'fa-twitter'
+  
+tiktok:
+  id: '@coelacant'
+  href: 'https://www.tiktok.com/'
+  title: 'TikTok'
+  fa-icon: 'fa-tiktok'
+
+discord:
+  id: 'YwaWnhJ'
+  href: 'https://www.discord.gg/'
+  title: 'Discord'
+  fa-icon: 'fa-discord'
+
+gumroad:
+  id: 'coelacant1'
+  href: 'https://www.gumroad.com/'
+  title: 'Gumroad'
+  fa-icon: 'fa-dollar-sign'
+
+patreon:
+  id: 'coelacant1'
+  href: 'https://www.patreon.com/'
+  title: 'Patreon'
+  fa-icon: 'fa-patreon'
+
+trello:
+  id: 'b/SNLjMpEO/coela-cant-protogen-upgrade-kits'
+  href: 'https://www.trello.com/'
+  title: 'Trello'
+  fa-icon: 'fa-trello'
 
 github:
   id: 'coelacant1'
   href: 'https://github.com/'
   title: 'GitHub'
-  fa-icon: 'fa-github-square'
+  fa-icon: 'fa-github'
+  
+telegram:
+  id: 'coelacant1'
+  href: 'https://www.t.me/'
+  title: 'Telegram'
+  fa-icon: 'fa-telegram'
+  
+email:
+  id: 'coelacannot@gmail.com'
+  href: 'mailto:'
+  title: 'Email'
+  fa-icon: 'fa-envelope'
+  
+soundcloud:
+  id: 'coelacant'
+  href: 'https://www.soundcloud.com/'
+  title: 'Soundcloud'
+  fa-icon: 'fa-soundcloud'
+
+spotify:
+  id: 'artist/3hL4VDBoFA8ER24MWlt1Ne'
+  href: 'https://open.spotify.com/'
+  title: 'Spotify'
+  fa-icon: 'fa-spotify'
+  
+youtube:
+  id: 'channel/UCTNMW7gZKl6F74iJfGqN2vA'
+  href: 'https://www.youtube.com/'
+  title: 'YouTube'
+  fa-icon: 'fa-youtube'
+
+applemusic:
+  id: 'us/album/ut-dr-covers/1507158033'
+  href: 'https://music.apple.com/'
+  title: 'Apple Music'
+  fa-icon: 'fa-music'
+  
+reddit:
+  id: 'coelacant1'
+  href: 'https://www.reddit.com/'
+  title: 'Reddit'
+  fa-icon: 'fa-reddit'
+  
+redbubble:
+  id: 'people/coelacant1'
+  href: 'https://www.redbubble.com/'
+  title: 'Redbubble'
+  fa-icon: 'fa-note-sticky'
