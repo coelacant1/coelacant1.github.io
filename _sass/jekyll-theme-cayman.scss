@@ -25,6 +25,14 @@
   box-sizing: border-box;
 }
 
+:root {
+  --fa-style-family: "Font Awesome 6 Pro";
+  --fa-style: 400;
+  --fa-border-color: #0d1117;
+  --fa-primary-color: white;
+  --fa-secondary-color: #aaaaaa;
+}
+
 body {
   padding: 0;
   margin: 0;
