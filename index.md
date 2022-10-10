@@ -17,26 +17,26 @@ If you are here and not sure why, here is a quick demo of what I make:
 
 If you are looking to contact me here are your best options!
 
-<table style="border-collapse: collapse; text-align: center; vertical-align: bottom;">
-  <tr style="border: none;">
-    <td>Primary Twitter:</td>
-    <td><a href="https://www.twitter.com/coelacant1" title="Twitter"><i class="fa fa-brands fa-twitter fa-2x" aria-hidden="true"></i></a><br><br></td>
+<table style="border-collapse: collapse;">
+  <tr>
+    <td class="link-table-td">Primary Twitter:</td>
+    <td class="link-table-td"><a href="https://www.twitter.com/coelacant1" title="Twitter"><i class="fa fa-brands fa-twitter fa-2x" aria-hidden="true"></i></a><br><br></td>
   </tr>
-  <tr style="border: none;">
-    <td>Business Twitter:</td>
-    <td><a href="https://www.twitter.com/coelacant1" title="Twitter"><i class="fa fa-brands fa-twitter fa-2x" aria-hidden="true"></i></a><br><br></td>
+  <tr>
+    <td class="link-table-td">Business Twitter:</td>
+    <td class="link-table-td"><a href="https://www.twitter.com/coelacant1" title="Twitter"><i class="fa fa-brands fa-twitter fa-2x" aria-hidden="true"></i></a><br><br></td>
   </tr>
-  <tr style="border: none;">
-    <td>Telegram:</td>
-    <td><a href="https://www.t.me/coelacant1" title="Telegram"><i class="fa fa-telegram fa-2x" aria-hidden="true"></i></a><br><br></td>
+  <tr>
+    <td class="link-table-td">Telegram:</td>
+    <td class="link-table-td"><a href="https://www.t.me/coelacant1" title="Telegram"><i class="fa fa-telegram fa-2x" aria-hidden="true"></i></a><br><br></td>
   </tr>
-  <tr style="border: none;">
-    <td>Discord:</td>
-    <td><a href="https://www.discord.gg/YwaWnhJ" title="Discord"><i class="fa fa-brands fa-discord fa-2x" aria-hidden="true"></i></a><br><br></td>
+  <tr>
+    <td class="link-table-td">Discord:</td>
+    <td class="link-table-td"><a href="https://www.discord.gg/YwaWnhJ" title="Discord"><i class="fa fa-brands fa-discord fa-2x" aria-hidden="true"></i></a><br><br></td>
   </tr>
-  <tr style="border: none;">
-    <td>Email:</td>
-    <td><a href="mailto:coelacannot@gmail.com" title="Email"><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></a><br><br></td>
+  <tr>
+    <td class="link-table-td">Email:</td>
+    <td class="link-table-td"><a href="mailto:coelacannot@gmail.com" title="Email"><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></a><br><br></td>
   </tr>
 </table>
 
