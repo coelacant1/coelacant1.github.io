@@ -25,6 +25,6 @@ If you are looking to contact me here are your best options!
 If you would like to check the status of your commission, you can see the Trello board below!
 
 <blockquote class="trello-board-compact">
-  <a href="[{url to board}](https://trello.com/b/SNLjMpEO/coela-cant-protogen-upgrade-kits)">Trello Board</a>
+  <a href="https://trello.com/b/SNLjMpEO/coela-cant-protogen-upgrade-kits">Trello Board</a>
 </blockquote>
 <script src="https://p.trellocdn.com/embed.min.js"></script>
