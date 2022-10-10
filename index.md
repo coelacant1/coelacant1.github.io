@@ -28,7 +28,7 @@ If you are looking to contact me here are your best options!
 
 If you would like to check the status of your commission, you can see the Trello board below!
 
-<iframe src="https://trello.com/b/SNLjMpEO.html" height="50%" width="100%" title="Coela Trello"></iframe>
+<iframe src="https://trello.com/b/SNLjMpEO.html" height="75rem" width="100%" title="Coela Trello"></iframe>
 
 To view on the Trello site, click the card below:
 <blockquote class="trello-board-compact">
