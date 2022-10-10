@@ -30,16 +30,10 @@ html {
 }
 
 .coela-logo {
-  width: 10%;
+  width: 20%;
   height: auto;
-  top: 0px;
-  left: 10px;
   margin-top: 0;
   margin-left: 5%;
-  padding-top: 0;
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-  padding-bottom: 0.75rem;
 }
 
 :root {
@@ -137,15 +131,24 @@ a {
   background-image: url("/assets/CoelaBackground.png");
 
   @include large {
-    padding: 5rem 6rem;
+    padding-top: 0;
+    padding-left: 6rem;
+    padding-right: 6rem;
+    padding-bottom: 5rem;
   }
 
   @include medium {
-    padding: 3rem 4rem;
+    padding-top: 0;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    padding-bottom: 3rem;
   }
 
   @include small {
-    padding: 2rem 1rem;
+    padding-top: 0;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 1rem;
   }
 }
 
