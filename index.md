@@ -17,33 +17,20 @@ If you are here and not sure why, here is a quick demo of what I make:
 
 If you are looking to contact me here are your best options!
 
-<table style="border-collapse: collapse;">
-  <tr>
-    <td class="link-table-td">Primary Twitter:</td>
-    <td class="link-table-td"><a href="https://www.twitter.com/coelacant1" title="Twitter"><i class="fa fa-brands fa-twitter fa-2x" aria-hidden="true"></i></a><br><br></td>
-  </tr>
-  <tr>
-    <td class="link-table-td">Business Twitter:</td>
-    <td class="link-table-td"><a href="https://www.twitter.com/coelacant1" title="Twitter"><i class="fa fa-brands fa-twitter fa-2x" aria-hidden="true"></i></a><br><br></td>
-  </tr>
-  <tr>
-    <td class="link-table-td">Telegram:</td>
-    <td class="link-table-td"><a href="https://www.t.me/coelacant1" title="Telegram"><i class="fa fa-telegram fa-2x" aria-hidden="true"></i></a><br><br></td>
-  </tr>
-  <tr>
-    <td class="link-table-td">Discord:</td>
-    <td class="link-table-td"><a href="https://www.discord.gg/YwaWnhJ" title="Discord"><i class="fa fa-brands fa-discord fa-2x" aria-hidden="true"></i></a><br><br></td>
-  </tr>
-  <tr>
-    <td class="link-table-td">Email:</td>
-    <td class="link-table-td"><a href="mailto:coelacannot@gmail.com" title="Email"><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></a><br><br></td>
-  </tr>
-</table>
+<a href="https://www.twitter.com/coelacant1" title="Twitter"><i class="fa fa-brands fa-twitter" aria-hidden="true"></i></a>[Main Twitter](https://www.twitter.com/coelacant1)<br><br>
+<a href="https://www.twitter.com/CoelaOrders" title="Twitter"><i class="fa fa-brands fa-twitter" aria-hidden="true"></i></a>[Business Twitter](https://twitter.com/CoelaOrders)<br><br>
+<a href="https://www.t.me/coelacant1" title="Telegram"><i class="fa fa-telegram" aria-hidden="true"></i></a>[Telegram](https://www.t.me/coelacant1)<br><br>
+<a href="https://www.discord.gg/YwaWnhJ" title="Discord"><i class="fa fa-brands fa-discord" aria-hidden="true"></i></a>[Discord](https://www.discord.gg/YwaWnhJ)<br><br>
+<a href="mailto:coelacannot@gmail.com" title="Email"><i class="fa fa-envelope" aria-hidden="true"></i></a>[Email](mailto:coelacannot@gmail.com)<br><br></td>
+
 
 # Commission Status!
 
 If you would like to check the status of your commission, you can see the Trello board below!
 
+<iframe src="https://trello.com/b/SNLjMpEO" height="50vh" width="50vw" title="Coela Trello"></iframe>
+
+To view on the Trello site, click the card below:
 <blockquote class="trello-board-compact">
   <a href="https://trello.com/b/SNLjMpEO">Trello Board</a>
 </blockquote>
