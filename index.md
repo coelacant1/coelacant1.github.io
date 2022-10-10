@@ -16,11 +16,29 @@ If you are here and not sure why, here is a quick demo of what I make:
 # Quick contact information!
 
 If you are looking to contact me here are your best options!
-<a href="https://www.twitter.com/coelacant1" title="Twitter"><i class="fa fa-brands fa-twitter fa-2x" aria-hidden="true"></i></a>Primary Twitter<br><br>
-<a href="https://www.twitter.com/coelacant1" title="Twitter"><i class="fa fa-brands fa-twitter fa-2x" aria-hidden="true"></i></a>Business Twitter<br><br>
-<a href="https://www.t.me/coelacant1" title="Telegram"><i class="fa fa-telegram fa-2x" aria-hidden="true"></i></a>Telegram<br><br>
-<a href="https://www.discord.gg/YwaWnhJ" title="Discord"><i class="fa fa-brands fa-discord fa-2x" aria-hidden="true"></i></a>Discord<br><br>
-<a href="mailto:coelacannot@gmail.com" title="Email"><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></a>Email<br><br>
+
+<table>
+  <tr>
+    <td>Primary Twitter</td>
+    <td><a href="https://www.twitter.com/coelacant1" title="Twitter"><i class="fa fa-brands fa-twitter fa-2x" aria-hidden="true"></i></a><br><br></td>
+  </tr>
+  <tr>
+    <td>Business Twitter</td>
+    <td><a href="https://www.twitter.com/coelacant1" title="Twitter"><i class="fa fa-brands fa-twitter fa-2x" aria-hidden="true"></i></a><br><br></td>
+  </tr>
+  <tr>
+    <td>Telegram</td>
+    <td><a href="https://www.t.me/coelacant1" title="Telegram"><i class="fa fa-telegram fa-2x" aria-hidden="true"></i></a><br><br></td>
+  </tr>
+  <tr>
+    <td>Discord</td>
+    <td><a href="https://www.discord.gg/YwaWnhJ" title="Discord"><i class="fa fa-brands fa-discord fa-2x" aria-hidden="true"></i></a><br><br></td>
+  </tr>
+  <tr>
+    <td>Email</td>
+    <td><a href="mailto:coelacannot@gmail.com" title="Email"><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></a><br><br></td>
+  </tr>
+</table>
 
 # Commission Status!
 
