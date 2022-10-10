@@ -2,19 +2,19 @@ twitter:
   id: 'coelacant1'
   href: 'https://www.twitter.com/'
   title: 'Twitter'
-  fa-icon: 'fa-twitter'
+  fa-icon: 'fa-brands fa-twitter'
   
 tiktok:
   id: '@coelacant'
   href: 'https://www.tiktok.com/'
   title: 'TikTok'
-  fa-icon: 'fa-tiktok'
+  fa-icon: 'fa-brands fa-tiktok'
 
 discord:
   id: 'YwaWnhJ'
   href: 'https://www.discord.gg/'
   title: 'Discord'
-  fa-icon: 'fa-discord'
+  fa-icon: 'fa-brands fa-discord'
 
 gumroad:
   id: 'coelacant1'
@@ -26,7 +26,7 @@ patreon:
   id: 'coelacant1'
   href: 'https://www.patreon.com/'
   title: 'Patreon'
-  fa-icon: 'fa-patreon'
+  fa-icon: 'fa-brands fa-patreon'
 
 trello:
   id: 'b/SNLjMpEO/coela-cant-protogen-upgrade-kits'
@@ -74,7 +74,7 @@ applemusic:
   id: 'us/album/ut-dr-covers/1507158033'
   href: 'https://music.apple.com/'
   title: 'Apple Music'
-  fa-icon: 'fa-music'
+  fa-icon: 'fa-solid fa-music'
   
 reddit:
   id: 'user/Coelacant1'
