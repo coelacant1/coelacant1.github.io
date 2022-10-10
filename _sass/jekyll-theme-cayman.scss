@@ -38,8 +38,9 @@ html {
 
 .link-table-td {
   border: none;
+  border-style : hidden!important;
   text-align: center;
-  vertical-align: bottom;
+  vertical-align: center;
 }
 
 :root {
