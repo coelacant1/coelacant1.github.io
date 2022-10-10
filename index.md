@@ -7,7 +7,7 @@ description: Home page!
 # Welcome to my site with pink fluffy dragons! <a href="./"><i class="fa fa-solid fa-dragon fa-2x"></i></a>
 
 
-If you have Protogen related questions you are in the right spot, check out some of the links at the top of the page! Also, feel free to join my [Discord server to work with other Protogen makers to help each other out.](https://discord.com/invite/YwaWnhJ)
+If you have Protogen related questions you are in the right spot, check out some of the links at the top of the page! Also, feel free to join my <a href="https://www.discord.gg/YwaWnhJ" title="Discord"><i class="fa fa-brands fa-discord" aria-hidden="true"></i></a> [Discord server to work with other Protogen makers to help each other out.](https://discord.com/invite/YwaWnhJ)
 
 # What I do!
 If you are here and not sure why, here is a quick demo of what I make:
@@ -17,26 +17,26 @@ If you are here and not sure why, here is a quick demo of what I make:
 
 If you are looking to contact me here are your best options!
 
-<table>
+<table style="border-collapse: collapse; text-align: center;">
   <tr>
     <td>Primary Twitter</td>
-    <td><a href="https://www.twitter.com/coelacant1" title="Twitter"><i class="fa fa-brands fa-twitter fa-2x" aria-hidden="true"></i></a><br><br></td>
+    <td style="border: none;"><a href="https://www.twitter.com/coelacant1" title="Twitter"><i class="fa fa-brands fa-twitter fa-2x" aria-hidden="true"></i></a><br><br></td>
   </tr>
   <tr>
     <td>Business Twitter</td>
-    <td><a href="https://www.twitter.com/coelacant1" title="Twitter"><i class="fa fa-brands fa-twitter fa-2x" aria-hidden="true"></i></a><br><br></td>
+    <td style="border: none;"><a href="https://www.twitter.com/coelacant1" title="Twitter"><i class="fa fa-brands fa-twitter fa-2x" aria-hidden="true"></i></a><br><br></td>
   </tr>
   <tr>
     <td>Telegram</td>
-    <td><a href="https://www.t.me/coelacant1" title="Telegram"><i class="fa fa-telegram fa-2x" aria-hidden="true"></i></a><br><br></td>
+    <td style="border: none;"><a href="https://www.t.me/coelacant1" title="Telegram"><i class="fa fa-telegram fa-2x" aria-hidden="true"></i></a><br><br></td>
   </tr>
   <tr>
     <td>Discord</td>
-    <td><a href="https://www.discord.gg/YwaWnhJ" title="Discord"><i class="fa fa-brands fa-discord fa-2x" aria-hidden="true"></i></a><br><br></td>
+    <td style="border: none;"><a href="https://www.discord.gg/YwaWnhJ" title="Discord"><i class="fa fa-brands fa-discord fa-2x" aria-hidden="true"></i></a><br><br></td>
   </tr>
   <tr>
     <td>Email</td>
-    <td><a href="mailto:coelacannot@gmail.com" title="Email"><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></a><br><br></td>
+    <td style="border: none;"><a href="mailto:coelacannot@gmail.com" title="Email"><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></a><br><br></td>
   </tr>
 </table>
 
