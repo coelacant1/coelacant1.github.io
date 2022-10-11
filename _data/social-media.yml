@@ -82,6 +82,12 @@ reddit:
   title: 'Reddit'
   fa-icon: 'fa-reddit'
   
+instagram:
+  id: 'coelacant1'
+  href: 'https://www.instagram.com/'
+  title: 'Instagram'
+  fa-icon: 'fa-instagram'
+  
 redbubble:
   id: 'people/coelacant1'
   href: 'https://www.redbubble.com/'
