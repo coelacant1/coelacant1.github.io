@@ -20,7 +20,7 @@ gumroad:
   id: 'coelacant1'
   href: 'https://www.gumroad.com/'
   title: 'Gumroad'
-  fa-icon: 'fa-dollar-sign'
+  fa-icon: 'fa-solid fa-store'
 
 patreon:
   id: 'coelacant1'
