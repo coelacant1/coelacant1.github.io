@@ -13,6 +13,7 @@ Below are the build files that are available to download for the Protogen design
 <script src="https://gumroad.com/js/gumroad-embed.js"></script>
 <div class="gumroad-product-embed"><a href="https://coelacant1.gumroad.com/l/coelaprotogenv1">Loading...</a></div>
 
+* * *
 
 ## [Coela Delta Protogen:](https://coelacant1.gumroad.com/l/coeladeltaprotogenv1)
 <script src="https://gumroad.com/js/gumroad-embed.js"></script>
