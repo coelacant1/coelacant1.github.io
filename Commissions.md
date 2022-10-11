@@ -17,7 +17,7 @@ Below are the currently available kits that are available for purchasing, availa
 
 * * *
 
-## [WS35 Controller and LED Kit:](https://coelacant1.gumroad.com/l/protogenledkit")
+## [WS35 Controller and LED Kit:](https://coelacant1.gumroad.com/l/protogenledkit)
 <script src="https://gumroad.com/js/gumroad-embed.js"></script>
 <div class="gumroad-product-embed"><a href="https://coelacant1.gumroad.com/l/protogenledkit">Loading...</a></div>
 
