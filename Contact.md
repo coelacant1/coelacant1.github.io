@@ -1,11 +1,12 @@
 ---
 layout: default
-title: Another page
-description: This is just another page
+title: Contact
+description: My contact information and social media links!
 ---
 
-## Welcome to another page
+# My contact information and social media links!
+* * *
 
-_yay_
+{% include social-media-links-nl.html %}
 
-[back](./)
+[Back to Home](./)
