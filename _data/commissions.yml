@@ -3,7 +3,7 @@ ekhub75:
   comment: 'Controller for Protogens using HUB75 P3 LED Panels'
   href: 'https://coelacant1.gumroad.com/l/HUB75ProtogenDynamicUpgrade'
   status: 'Open'
-  quotestatus: 'Open'
+  quotestatus: 'None'
   ready: 'Yes'
   
 ekws35:
@@ -11,7 +11,7 @@ ekws35:
   comment: 'Complete electronics kit for Beta/Delta/Kaiborg/Tiko style Protogens'
   href: 'https://coelacant1.gumroad.com/l/HUB75ProtogenDynamicUpgrade'
   status: 'Open'
-  quotestatus: 'Open'
+  quotestatus: 'None'
   ready: 'Yes'
   
 prbeta:
@@ -19,7 +19,7 @@ prbeta:
   comment: '3D printed parts kit for the Beta protogen'
   href: ''
   status: 'Closed'
-  quotestatus: 'Closed'
+  quotestatus: 'None'
   ready: 'No'
   
 prdelta:
@@ -27,7 +27,7 @@ prdelta:
   comment: '3D printed parts kit for the Delta protogen'
   href: ''
   status: 'Closed'
-  quotestatus: 'Closed'
+  quotestatus: 'None'
   ready: 'No'
   
 vfprotogen:
@@ -35,7 +35,7 @@ vfprotogen:
   comment: 'Vacuum formed visor that is compatible with the Beta and Delta Protogens'
   href: ''
   status: 'Closed'
-  quotestatus: 'Closed'
+  quotestatus: 'None'
   ready: 'No'
   
 fpbeta:
