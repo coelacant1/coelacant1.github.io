@@ -42,7 +42,7 @@ fpbeta:
   title: 'Complete Beta Protogen Build'
   comment: 'Complete Beta Protogen build with 3D prints, tinted visor, and electronics'
   href: ''
-  status: 'Closed'
+  status: 'None'
   quotestatus: 'Closed'
   ready: 'No'
   
@@ -50,6 +50,6 @@ fpdelta:
   title: 'Complete Delta Protogen Build'
   comment: 'Complete Delta Protogen build with 3D prints, tinted visor, and electronics'
   href: ''
-  status: 'Closed'
+  status: 'None'
   quotestatus: 'Closed'
   ready: 'No'
