@@ -7,8 +7,12 @@
     {% for entry in comm %}
         {% assign key = entry | first %}
         {% if comm[key].title %}
-              <h3><a href="{{ comm[key].href }}">{{ comm[key].title }}:</a></h3>
-
+              {% if comm[key].href %}
+                    <a href="{{ comm[key].href }}">{{ comm[key].title }}:</a>
+              {% else %}
+                    <p>{{ comm[key].title }}:</p>
+              {% endif %}
+    
               {% if comm[key].status == "Open" %}
                   <p><i class="fa fa-solid square-check fa-2x green-color"></i>&nbsp;&nbsp;Open for Commission</p>
               {% elsif comm[key].status == "Closed" %}
