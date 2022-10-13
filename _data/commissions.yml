@@ -17,7 +17,7 @@ ekws35:
 prbeta:
   title: '3D Printed Beta Protogen Kit'
   comment: '3D printed parts kit for the Beta protogen'
-  href: ''
+  href: 'None'
   status: 'Closed'
   quotestatus: 'None'
   ready: 'No'
@@ -25,7 +25,7 @@ prbeta:
 prdelta:
   title: '3D Printed Delta Protogen Kit'
   comment: '3D printed parts kit for the Delta protogen'
-  href: ''
+  href: 'None'
   status: 'Closed'
   quotestatus: 'None'
   ready: 'No'
@@ -33,7 +33,7 @@ prdelta:
 vfprotogen:
   title: 'Vacuum Formed Beta/Delta Protogen Visor'
   comment: 'Vacuum formed visor that is compatible with the Beta and Delta Protogens'
-  href: ''
+  href: 'None'
   status: 'Closed'
   quotestatus: 'None'
   ready: 'No'
@@ -41,7 +41,7 @@ vfprotogen:
 fpbeta:
   title: 'Complete Beta Protogen Build'
   comment: 'Complete Beta Protogen build with 3D prints, tinted visor, and electronics'
-  href: ''
+  href: 'None'
   status: 'None'
   quotestatus: 'Closed'
   ready: 'No'
@@ -49,7 +49,7 @@ fpbeta:
 fpdelta:
   title: 'Complete Delta Protogen Build'
   comment: 'Complete Delta Protogen build with 3D prints, tinted visor, and electronics'
-  href: ''
+  href: 'None'
   status: 'None'
   quotestatus: 'Closed'
   ready: 'No'
