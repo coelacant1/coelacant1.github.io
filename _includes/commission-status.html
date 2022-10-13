@@ -1,0 +1,59 @@
+{% if site.data.commissions %}
+<script src="https://gumroad.com/js/gumroad-embed.js"></script>
+<div id="commissions-status">
+    <h1>Commission Status:</h1>
+    <hr>
+    {% assign sm = site.data.commissions %}
+    {% for entry in sm %}
+        {% assign key = entry | first %}
+       {% if sm[key].id %}
+              <h3><a href"{{ sm[key].href }}">{{ sm[key].title }}:</a></h3>
+
+              {% if sm[key].status == "Open" %}
+                  <p><i class="fa square-check fa-2x green-color"></i>&nbsp;&nbsp;Open for Commission</p>
+              {% elseif sm[key].status == "Closed" %}
+                  <p><i class="fa square-xmark fa-2x red-color"></i>&nbsp;&nbsp;Commission Closed</p>
+              {% endif %}
+
+              {% if sm[key].quotestatus == "Open" %}
+                  <p><i class="fa square-check fa-2x green-color"></i>&nbsp;&nbsp;Open for Quotes</p>
+              {% elseif sm[key].quotestatus == "Closed" %}
+                  <p><i class="fa square-xmark fa-2x red-color"></i>&nbsp;&nbsp;Quotes Closed</p>
+              {% endif %}
+                
+        {% endif %}
+    {% endfor %}
+</div>
+<div id="commissions">
+    <h1>Current Projects:</h1>
+    <hr>
+    {% assign sm = site.data.commissions %}
+    {% for entry in sm %}
+        {% assign key = entry | first %}
+        {% if sm[key].id %}
+            {% if sm[key].ready == "Yes" %}
+                <h2><a href"{{ sm[key].href }}">{{ sm[key].title }}:</a></h2>
+                <p>{{ sm[key].comment }}</p>
+                
+                {% if sm[key].status == "Open" %}
+                    <p><i class="fa square-check fa-2x green-color"></i>&nbsp;&nbsp;Open for Commission</p>
+                {% elseif sm[key].status == "Closed" %}
+                    <p><i class="fa square-xmark fa-2x red-color"></i>&nbsp;&nbsp;Commission Closed</p>
+                {% endif %}
+  
+                {% if sm[key].quotestatus == "Open" %}
+                    <p><i class="fa square-check fa-2x green-color"></i>&nbsp;&nbsp;Open for Quotes</p>
+                {% elseif sm[key].quotestatus == "Closed" %}
+                    <p><i class="fa square-xmark fa-2x red-color"></i>&nbsp;&nbsp;Quotes Closed</p>
+                {% endif %}
+                
+                <div class="gumroad-product-embed"><a href="{{ sm[key].href }}">Loading...</a></div>
+            {% else %}
+                <h2>{{ sm[key].title }}:</h2>
+                <hr>
+                <em>Coming Soon...</em>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+</div>
+{% endif %}
