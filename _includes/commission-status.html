@@ -3,21 +3,21 @@
 <div id="commissions-status">
     <h1>Commission Status:</h1>
     <hr>
-    {% assign sm = site.data.commissions %}
-    {% for entry in sm %}
+    {% assign comm = site.data.commissions %}
+    {% for entry in comm %}
         {% assign key = entry | first %}
-        {% if sm[key].id %}
-              <h3><a href"{{ sm[key].href }}">{{ sm[key].title }}:</a></h3>
+        {% if comm[key].title %}
+              <h3><a href"{{ comm[key].href }}">{{ comm[key].title }}:</a></h3>
 
-              {% if sm[key].status == "Open" %}
+              {% if comm[key].status == "Open" %}
                   <p><i class="fa square-check fa-2x green-color"></i>&nbsp;&nbsp;Open for Commission</p>
-              {% elsif sm[key].status == "Closed" %}
+              {% elsif comm[key].status == "Closed" %}
                   <p><i class="fa square-xmark fa-2x red-color"></i>&nbsp;&nbsp;Commission Closed</p>
               {% endif %}
 
-              {% if sm[key].quotestatus == "Open" %}
+              {% if comm[key].quotestatus == "Open" %}
                   <p><i class="fa square-check fa-2x green-color"></i>&nbsp;&nbsp;Open for Quotes</p>
-              {% elsif sm[key].quotestatus == "Closed" %}
+              {% elsif comm[key].quotestatus == "Closed" %}
                   <p><i class="fa square-xmark fa-2x red-color"></i>&nbsp;&nbsp;Quotes Closed</p>
               {% endif %}
                 
@@ -27,29 +27,29 @@
 <div id="commissions">
     <h1>Current Projects:</h1>
     <hr>
-    {% assign sm = site.data.commissions %}
-    {% for entry in sm %}
+    {% assign comm = site.data.commissions %}
+    {% for entry in comm %}
         {% assign key = entry | first %}
-        {% if sm[key].id %}
-            {% if sm[key].ready == "Yes" %}
-                <h2><a href"{{ sm[key].href }}">{{ sm[key].title }}:</a></h2>
-                <p>{{ sm[key].comment }}</p>
+        {% if comm[key].title %}
+            {% if comm[key].ready == "Yes" %}
+                <h2><a href"{{ comm[key].href }}">{{ comm[key].title }}:</a></h2>
+                <p>{{ comm[key].comment }}</p>
                 
-                {% if sm[key].status == "Open" %}
+                {% if comm[key].status == "Open" %}
                     <p><i class="fa square-check fa-2x green-color"></i>&nbsp;&nbsp;Open for Commission</p>
-                {% elsif sm[key].status == "Closed" %}
+                {% elsif comm[key].status == "Closed" %}
                     <p><i class="fa square-xmark fa-2x red-color"></i>&nbsp;&nbsp;Commission Closed</p>
                 {% endif %}
   
-                {% if sm[key].quotestatus == "Open" %}
+                {% if comm[key].quotestatus == "Open" %}
                     <p><i class="fa square-check fa-2x green-color"></i>&nbsp;&nbsp;Open for Quotes</p>
-                {% elsif sm[key].quotestatus == "Closed" %}
+                {% elsif comm[key].quotestatus == "Closed" %}
                     <p><i class="fa square-xmark fa-2x red-color"></i>&nbsp;&nbsp;Quotes Closed</p>
                 {% endif %}
                 
-                <div class="gumroad-product-embed"><a href="{{ sm[key].href }}">Loading...</a></div>
+                <div class="gumroad-product-embed"><a href="{{ comm[key].href }}">Loading...</a></div>
             {% else %}
-                <h2>{{ sm[key].title }}:</h2>
+                <h2>{{ comm[key].title }}:</h2>
                 <hr>
                 <em>Coming Soon...</em>
             {% endif %}
