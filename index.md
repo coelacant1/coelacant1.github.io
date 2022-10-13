@@ -26,7 +26,7 @@ If you are looking to contact me here are your best options!
 <a href="mailto:coelacannot@gmail.com" title="Email"><i class="fa fa-envelope" aria-hidden="true"></i></a>[  Email](mailto:coelacannot@gmail.com)<br><br>
 
 
-# Commission Status!
+# Active Commissions!
 * * *
 
 If you would like to check the status of your commission, you can see the Trello board below!
