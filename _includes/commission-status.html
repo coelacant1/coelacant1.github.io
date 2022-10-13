@@ -7,10 +7,10 @@
     {% for entry in comm %}
         {% assign key = entry | first %}
         {% if comm[key].title %}
-              {% if comm[key].href %}
-                    <a href="{{ comm[key].href }}">{{ comm[key].title }}:</a>
-              {% else %}
+              {% if comm[key].href == "None" %}
                     <p>{{ comm[key].title }}:</p>
+              {% else %}
+                    <a href="{{ comm[key].href }}">{{ comm[key].title }}:</a>
               {% endif %}
     
               {% if comm[key].status == "Open" %}
