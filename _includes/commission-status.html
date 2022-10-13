@@ -7,22 +7,32 @@
     {% for entry in comm %}
         {% assign key = entry | first %}
         {% if comm[key].title %}
-              {% if comm[key].href == "None" %}
-                    <p>{{ comm[key].title }}:</p>
-              {% else %}
-                    <a href="{{ comm[key].href }}">{{ comm[key].title }}:</a>
-              {% endif %}
-    
               {% if comm[key].status == "Open" %}
-                  <p><i class="fa fa-solid square-check fa-2x green-color"></i>&nbsp;&nbsp;Open for Commission</p>
+                  {% if comm[key].href == "None" %}
+                      <p><i class="fa fa-solid square-check fa-2x"></i>&nbsp;&nbsp;{{ comm[key].title }}: Open for Commission</p>
+                  {% else %}
+                      <a href="{{ comm[key].href }}"><i class="fa fa-solid square-check fa-2x"></i>&nbsp;&nbsp;{{ comm[key].title }}: Open for Commission</a>
+                  {% endif %}
               {% elsif comm[key].status == "Closed" %}
-                  <p><i class="fa fa-solid square-xmark fa-2x red-color"></i>&nbsp;&nbsp;Commissions Closed</p>
+                  {% if comm[key].href == "None" %}
+                      <p><i class="fa fa-solid square-xmark fa-2x"></i>&nbsp;&nbsp;{{ comm[key].title }}: Commissions Closed</p>
+                  {% else %}
+                      <a href="{{ comm[key].href }}"><i class="fa fa-solid square-xmark fa-2x"></i>&nbsp;&nbsp;{{ comm[key].title }}: Commissions Closed</a>
+                  {% endif %}
               {% endif %}
 
               {% if comm[key].quotestatus == "Open" %}
-                  <p><i class="fa fa-solid square-check fa-2x green-color"></i>&nbsp;&nbsp;Open for Quotes</p>
+                  {% if comm[key].href == "None" %}
+                      <p><i class="fa fa-solid square-check fa-2x"></i>&nbsp;&nbsp;{{ comm[key].title }}: Open for Quotes</p>
+                  {% else %}
+                      <a href="{{ comm[key].href }}"><i class="fa fa-solid square-check fa-2x"></i>&nbsp;&nbsp;{{ comm[key].title }}: Open for Quotes</a>
+                  {% endif %}
               {% elsif comm[key].quotestatus == "Closed" %}
-                  <p><i class="fa fa-solid square-xmark fa-2x red-color"></i>&nbsp;&nbsp;Quotes Closed</p>
+                  {% if comm[key].href == "None" %}
+                      <p><i class="fa fa-solid square-xmark fa-2x"></i>&nbsp;&nbsp;{{ comm[key].title }}: Quotes Closed</p>
+                  {% else %}
+                      <a href="{{ comm[key].href }}"><i class="fa fa-solid square-xmark fa-2x"></i>&nbsp;&nbsp;{{ comm[key].title }}: Quotes Closed</a>
+                  {% endif %}
               {% endif %}
                 
         {% endif %}
@@ -40,15 +50,15 @@
                 <p>{{ comm[key].comment }}</p>
                 
                 {% if comm[key].status == "Open" %}
-                    <p><i class="fa fa-solid square-check fa-2x green-color"></i>&nbsp;&nbsp;Open for Commission</p>
+                    <p><i class="fa fa-solid square-check fa-2x"></i>&nbsp;&nbsp;Open for Commission</p>
                 {% elsif comm[key].status == "Closed" %}
-                    <p><i class="fa fa-solid square-xmark fa-2x red-color"></i>&nbsp;&nbsp;Commission Closed</p>
+                    <p><i class="fa fa-solid square-xmark fa-2x"></i>&nbsp;&nbsp;Commission Closed</p>
                 {% endif %}
   
                 {% if comm[key].quotestatus == "Open" %}
-                    <p><i class="fa fa-solid square-check fa-2x green-color"></i>&nbsp;&nbsp;Open for Quotes</p>
+                    <p><i class="fa fa-solid square-check fa-2x"></i>&nbsp;&nbsp;Open for Quotes</p>
                 {% elsif comm[key].quotestatus == "Closed" %}
-                    <p><i class="fa fa-solid square-xmark fa-2x red-color"></i>&nbsp;&nbsp;Quotes Closed</p>
+                    <p><i class="fa fa-solid square-xmark fa-2x"></i>&nbsp;&nbsp;Quotes Closed</p>
                 {% endif %}
                 
                 <div class="gumroad-product-embed"><a href="{{ comm[key].href }}">Loading...</a></div>
