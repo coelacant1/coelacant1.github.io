@@ -1,0 +1,55 @@
+ekhub75:
+  title: 'HUB75 P3 Controller Kit'
+  comment: 'Controller for Protogens using HUB75 P3 LED Panels'
+  href: 'https://coelacant1.gumroad.com/l/HUB75ProtogenDynamicUpgrade'
+  status: 'Open'
+  quotestatus: 'Open'
+  ready: 'Yes'
+  
+ekws35:
+  title: 'WS35 Controller and LED Kit'
+  comment: 'Complete electronics kit for Beta/Delta/Kaiborg/Tiko style Protogens'
+  href: 'https://coelacant1.gumroad.com/l/HUB75ProtogenDynamicUpgrade'
+  status: 'Open'
+  quotestatus: 'Open'
+  ready: 'Yes'
+  
+prbeta:
+  title: '3D Printed Beta Protogen Kit'
+  comment: '3D printed parts kit for the Beta protogen'
+  href: ''
+  status: 'Closed'
+  quotestatus: 'Closed'
+  ready: 'No'
+  
+prdelta:
+  title: '3D Printed Delta Protogen Kit'
+  comment: '3D printed parts kit for the Delta protogen'
+  href: ''
+  status: 'Closed'
+  quotestatus: 'Closed'
+  ready: 'No'
+  
+vfprotogen:
+  title: 'Vacuum Formed Beta/Delta Protogen Visor'
+  comment: 'Vacuum formed visor that is compatible with the Beta and Delta Protogens'
+  href: ''
+  status: 'Closed'
+  quotestatus: 'Closed'
+  ready: 'No'
+  
+fpbeta:
+  title: 'Complete Beta Protogen Build'
+  comment: 'Complete Beta Protogen build with 3D prints, tinted visor, and electronics'
+  href: ''
+  status: 'Closed'
+  quotestatus: 'Closed'
+  ready: 'No'
+  
+fpdelta:
+  title: 'Complete Delta Protogen Build'
+  comment: 'Complete Delta Protogen build with 3D prints, tinted visor, and electronics'
+  href: ''
+  status: 'Closed'
+  quotestatus: 'Closed'
+  ready: 'No'
