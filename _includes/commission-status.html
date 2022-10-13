@@ -6,18 +6,18 @@
     {% assign sm = site.data.commissions %}
     {% for entry in sm %}
         {% assign key = entry | first %}
-       {% if sm[key].id %}
+        {% if sm[key].id %}
               <h3><a href"{{ sm[key].href }}">{{ sm[key].title }}:</a></h3>
 
               {% if sm[key].status == "Open" %}
                   <p><i class="fa square-check fa-2x green-color"></i>&nbsp;&nbsp;Open for Commission</p>
-              {% elseif sm[key].status == "Closed" %}
+              {% elsif sm[key].status == "Closed" %}
                   <p><i class="fa square-xmark fa-2x red-color"></i>&nbsp;&nbsp;Commission Closed</p>
               {% endif %}
 
               {% if sm[key].quotestatus == "Open" %}
                   <p><i class="fa square-check fa-2x green-color"></i>&nbsp;&nbsp;Open for Quotes</p>
-              {% elseif sm[key].quotestatus == "Closed" %}
+              {% elsif sm[key].quotestatus == "Closed" %}
                   <p><i class="fa square-xmark fa-2x red-color"></i>&nbsp;&nbsp;Quotes Closed</p>
               {% endif %}
                 
@@ -37,13 +37,13 @@
                 
                 {% if sm[key].status == "Open" %}
                     <p><i class="fa square-check fa-2x green-color"></i>&nbsp;&nbsp;Open for Commission</p>
-                {% elseif sm[key].status == "Closed" %}
+                {% elsif sm[key].status == "Closed" %}
                     <p><i class="fa square-xmark fa-2x red-color"></i>&nbsp;&nbsp;Commission Closed</p>
                 {% endif %}
   
                 {% if sm[key].quotestatus == "Open" %}
                     <p><i class="fa square-check fa-2x green-color"></i>&nbsp;&nbsp;Open for Quotes</p>
-                {% elseif sm[key].quotestatus == "Closed" %}
+                {% elsif sm[key].quotestatus == "Closed" %}
                     <p><i class="fa square-xmark fa-2x red-color"></i>&nbsp;&nbsp;Quotes Closed</p>
                 {% endif %}
                 
