@@ -65,7 +65,7 @@ spotify:
   fa-icon: 'fa-spotify'
   
 youtube:
-  id: 'channel/UCTNMW7gZKl6F74iJfGqN2vA'
+  id: '@Coelacant'
   href: 'https://www.youtube.com/'
   title: 'YouTube'
   fa-icon: 'fa-youtube'
