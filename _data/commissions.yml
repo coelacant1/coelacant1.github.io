@@ -1,7 +1,7 @@
 ekhub75:
   title: 'HUB75 P3 Controller Kit'
   comment: 'Controller for Protogens using HUB75 P3 LED Panels'
-  href: 'https://coelacant1.gumroad.com/l/HUB75ProtogenDynamicUpgrade'
+  href: 'https://shop.coelacant.com/p/hub75/'
   status: 'Open'
   quotestatus: 'None'
   ready: 'Yes'
@@ -9,7 +9,7 @@ ekhub75:
 ekws35:
   title: 'WS35 Controller and LED Kit'
   comment: 'Complete electronics kit for Beta/Delta/Kaiborg/Tiko style Protogens'
-  href: 'https://coelacant1.gumroad.com/l/protogenledkit'
+  href: 'https://shop.coelacant.com/p/ws35/'
   status: 'Closed'
   quotestatus: 'None'
   ready: 'Yes'
