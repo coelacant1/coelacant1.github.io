@@ -34,43 +34,13 @@
                       <p ><a style="color:red" href="{{ comm[key].href }}"><i class="fa fa-solid fa-square-xmark"></i>&nbsp;&nbsp;{{ comm[key].title }}: Quotes Closed</a></p>
                   {% endif %}
               {% endif %}
-                
         {% endif %}
     {% endfor %}
 </div>
 <div id="commissions">
     <h1>Current Projects:</h1>
     <hr>
-    {% assign comm = site.data.commissions %}
-    {% for entry in comm %}
-        {% assign key = entry | first %}
-        {% if comm[key].title %}
-            {% if comm[key].ready == "Yes" %}
-                <h2><a href="{{ comm[key].href }}">{{ comm[key].title }}:</a></h2>
-                <p>{{ comm[key].comment }}</p>
-                
-                {% if comm[key].status == "Open" %}
-                    <p style="color:green"><i class="fa fa-solid fa-square-check"></i>&nbsp;&nbsp;Open for Commissions</p>
-                {% elsif comm[key].status == "Closed" %}
-                    <p style="color:red"><i class="fa fa-solid fa-square-xmark"></i>&nbsp;&nbsp;Commissions Closed</p>
-                {% endif %}
-  
-                {% if comm[key].quotestatus == "Open" %}
-                    <p style="color:green"><i class="fa fa-solid fa-square-check"></i>&nbsp;&nbsp;Open for Quotes</p>
-                {% elsif comm[key].quotestatus == "Closed" %}
-                    <p style="color:red"><i class="fa fa-solid fa-square-xmark"></i>&nbsp;&nbsp;Quotes Closed</p>
-                {% endif %}
-                
-                <!-- <div class="gumroad-product-embed"><a href="{{ comm[key].href }}">Loading...</a></div> -->
-    
-                <iframe src="https://shop.coelacant.com/embed/product/isqrtg/" width="100%" height="500" allowtransparency="true" style="border: none;"></iframe>
-                <script src="https://sellfy.com/js/api_buttons.js"></script>
-            {% else %}
-                <h2>{{ comm[key].title }}:</h2>
-                <hr>
-                <em>Coming Soon...</em>
-            {% endif %}
-        {% endif %}
-    {% endfor %}
+    <iframe src="https://shop.coelacant.com/embed/store/" width="100%" height="365" allowtransparency="true" style="border: none;"></iframe>
+    <script src="https://sellfy.com/js/api_buttons.js"></script>
 </div>
 {% endif %}
