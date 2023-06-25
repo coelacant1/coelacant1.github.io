@@ -5,7 +5,7 @@ twitter:
   fa-icon: 'fa-brands fa-twitter'
 
 bluesky:
-  id: 'coelacant1.bsky.social'
+  id: 'coela.io'
   href: 'https://bsky.app/profile/'
   title: 'Bluesky'
   fa-icon: 'fa-brands fa-bluesky'
