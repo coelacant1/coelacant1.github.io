@@ -19,7 +19,7 @@ If you are here and not sure why, here is a quick demo of what I make:
 
 If you are looking to contact me here are your best options!
 
-<a href="https://bsky.app/profile/coelacant1.bsky.social" title="Bluesky"><i class="fa fa-brands fa-bluesky" aria-hidden="true"></i></a>[  Bluesky](https://bsky.app/profile/coelacant1.bsky.social)<br><br>
+<a href="https://bsky.app/profile/coela.io" title="Bluesky"><i class="fa fa-brands fa-bluesky" aria-hidden="true"></i></a>[  Bluesky](https://bsky.app/profile/coela.io)<br><br>
 <a href="https://www.twitter.com/coelacant1" title="Twitter"><i class="fa fa-brands fa-twitter" aria-hidden="true"></i></a>[  Main Twitter](https://www.twitter.com/coelacant1)<br><br>
 <a href="https://www.twitter.com/CoelaOrders" title="Twitter"><i class="fa fa-brands fa-twitter" aria-hidden="true"></i></a>[  Business Twitter](https://twitter.com/CoelaOrders)<br><br>
 <a href="https://www.t.me/coelacant1" title="Telegram"><i class="fa fa-telegram" aria-hidden="true"></i></a>[  Telegram](https://www.t.me/coelacant1)<br><br>
