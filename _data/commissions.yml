@@ -17,16 +17,16 @@ ekws35:
 prbeta:
   title: '3D Printed Beta Protogen Kit'
   comment: '3D printed parts kit for the Beta protogen'
-  href: 'Open'
-  status: 'Closed'
+  href: 'https://shop.coelacant.com/p/beta-protogen-3d-print-kit/'
+  status: 'Open'
   quotestatus: 'None'
   ready: 'Yes'
   
 prdelta:
   title: '3D Printed Delta Protogen Kit'
   comment: '3D printed parts kit for the Delta protogen'
-  href: 'Open'
-  status: 'Closed'
+  href: 'https://shop.coelacant.com/p/delta-protogen-3d/'
+  status: 'Open'
   quotestatus: 'None'
   ready: 'Yes'
   
