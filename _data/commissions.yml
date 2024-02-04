@@ -2,7 +2,7 @@ ekhub75:
   title: 'HUB75 P3 Controller Kit'
   comment: 'Controller for Protogens using HUB75 P3 LED Panels'
   href: 'https://shop.coelacant.com/p/hub75/'
-  status: 'Open'
+  status: 'Closed'
   quotestatus: 'None'
   ready: 'Yes'
   
@@ -10,7 +10,7 @@ ekws35:
   title: 'WS35 Controller and LED Kit'
   comment: 'Complete electronics kit for Beta/Delta/Kaiborg/Tiko style Protogens'
   href: 'https://shop.coelacant.com/p/ws35/'
-  status: 'Open'
+  status: 'Closed'
   quotestatus: 'None'
   ready: 'Yes'
   
@@ -18,7 +18,7 @@ prbeta:
   title: '3D Printed Beta Protogen Kit'
   comment: '3D printed parts kit for the Beta protogen'
   href: 'https://shop.coelacant.com/p/beta-protogen-3d-print-kit/'
-  status: 'Open'
+  status: 'Closed'
   quotestatus: 'None'
   ready: 'Yes'
   
@@ -26,7 +26,7 @@ prdelta:
   title: '3D Printed Delta Protogen Kit'
   comment: '3D printed parts kit for the Delta protogen'
   href: 'https://shop.coelacant.com/p/delta-protogen-3d/'
-  status: 'Open'
+  status: 'Closed'
   quotestatus: 'None'
   ready: 'Yes'
   
@@ -34,7 +34,7 @@ vfprotogen:
   title: 'Vacuum Formed Beta/Delta Protogen Visor'
   comment: 'Vacuum formed visor that is compatible with the Beta and Delta Protogens'
   href: 'https://shop.coelacant.com/p/bd-visor/'
-  status: 'Open'
+  status: 'Closed'
   quotestatus: 'None'
   ready: 'Yes'
   
