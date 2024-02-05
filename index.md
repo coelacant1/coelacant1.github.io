@@ -30,6 +30,8 @@ If you are looking to contact me here are your best options!
 # Active Commissions!
 * * *
 
+Current commissions are working on being finished and no new commissions will be taken. All my files are up for free and more will be added soon!
+
 If you would like to check the status of your commission, you can see the Trello board below!
 
 <iframe src="https://trello.com/b/SNLjMpEO.html" style="width: 100%; height: 50vh;" title="Coela Trello"></iframe>
