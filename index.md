@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Coela Can't! Website Home
-description: Protogen Electronics Kits and More!
+description: Protogens, guides, and digital files!
 ---
 
 # Welcome to my site with pink fluffy dragons! <a href="./"><i class="fa fa-solid fa-dragon fa-2x"></i></a>
