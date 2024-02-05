@@ -9,9 +9,9 @@ Below are the build files that are available to download for the Protogen design
 # Digital Files for Download
 * * *
 
-## [Coela Beta Protogen:](https://coelacant1.gumroad.com/l/coelaprotogenv1)
+## [Coela Epsilon Protogen:](https://coelacant1.gumroad.com/l/coelaprotogenv1)
 <script src="https://gumroad.com/js/gumroad-embed.js"></script>
-<div class="gumroad-product-embed"><a href="https://coelacant1.gumroad.com/l/coelaprotogenv1">Loading...</a></div>
+<div class="gumroad-product-embed"><a href="https://coelacant1.gumroad.com/l/coelaepsilonprotogenv1">Loading...</a></div>
 
 * * *
 
@@ -19,5 +19,10 @@ Below are the build files that are available to download for the Protogen design
 <script src="https://gumroad.com/js/gumroad-embed.js"></script>
 <div class="gumroad-product-embed"><a href="https://coelacant1.gumroad.com/l/coeladeltaprotogenv1">Loading...</a></div>
 
+* * *
+
+## [Coela Beta Protogen:](https://coelacant1.gumroad.com/l/coelaprotogenv1)
+<script src="https://gumroad.com/js/gumroad-embed.js"></script>
+<div class="gumroad-product-embed"><a href="https://coelacant1.gumroad.com/l/coelaprotogenv1">Loading...</a></div>
 
 [Back to Home](./)
