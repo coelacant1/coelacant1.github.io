@@ -29,7 +29,7 @@ If you are looking to contact me here are your best options!
 <a href="https://bsky.app/profile/coela.io" title="Bluesky"><i class="fa fa-brands fa-bluesky" aria-hidden="true"></i></a>[  Bluesky](https://bsky.app/profile/coela.io)<br><br>
 
 
-# Active Commissions!
+# Current Commissions (Closing out, not opening for more)
 * * *
 
 Current commissions are working on being finished and no new commissions will be taken. All my files are up for free and more will be added soon!
