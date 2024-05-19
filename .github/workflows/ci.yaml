@@ -2,17 +2,26 @@ on:
   push:
   pull_request:
     types: [opened, synchronize]
+
 jobs:
   build:
     runs-on: ubuntu-latest
     name: script/cibuild
     steps:
       - uses: actions/checkout@v3
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.7
+          ruby-version: '2.7'
           bundler-cache: true
-      - name: build
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install
+      - name: Build
         run: script/bootstrap
-      - name: test
+      - name: Test
         run: script/cibuild
