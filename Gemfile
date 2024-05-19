@@ -3,3 +3,6 @@
 source "https://rubygems.org"
 
 gemspec
+
+# Add csv gem explicitly
+gem 'csv'
