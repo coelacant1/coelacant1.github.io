@@ -11,7 +11,7 @@ I do a few things! I tend to switch everything up because of unrestricted ADHD. 
 
 # What I do!
 * * *
-If you're here for art, I have spicy edits up and available on my <a href="https://www.patreon.com/coelacant1" title="Patreon"><i class="fa fa-brands fa-patreon" aria-hidden="true"></i></a>[  Patreon](https://www.patreon.com/coelacant1), this is for 18+ only.<br><br>
+If you're here for art, I have high-resolution versions as well as spicy edits up and available on my <a href="https://www.patreon.com/coelacant1" title="Patreon"><i class="fa fa-brands fa-patreon" aria-hidden="true"></i></a>[  Patreon](https://www.patreon.com/coelacant1), this has both SFW and NSFW content.<br><br>
 
 <img class="coela-logo" src="/assets/coela_nobg_crop2x.png" alt="CoelaSus" />
 
