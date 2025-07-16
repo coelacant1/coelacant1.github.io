@@ -10,11 +10,11 @@ bluesky:
   title: 'Bluesky'
   fa-icon: 'fa-brands fa-bluesky'
   
-tiktok:
-  id: '@coelacant'
-  href: 'https://www.tiktok.com/'
-  title: 'TikTok'
-  fa-icon: 'fa-brands fa-tiktok'
+github:
+  id: 'coelacant1'
+  href: 'https://github.com/'
+  title: 'GitHub'
+  fa-icon: 'fa-github'
 
 discord:
   id: 'YwaWnhJ'
@@ -33,18 +33,6 @@ patreon:
   href: 'https://www.patreon.com/'
   title: 'Patreon'
   fa-icon: 'fa-brands fa-patreon'
-
-trello:
-  id: 'b/SNLjMpEO/coela-cant-protogen-upgrade-kits'
-  href: 'https://www.trello.com/'
-  title: 'Trello'
-  fa-icon: 'fa-trello'
-
-github:
-  id: 'coelacant1'
-  href: 'https://github.com/'
-  title: 'GitHub'
-  fa-icon: 'fa-github'
   
 telegram:
   id: 'coelacant1'
@@ -52,11 +40,11 @@ telegram:
   title: 'Telegram'
   fa-icon: 'fa-telegram'
   
-email:
-  id: 'coelacannot@gmail.com'
-  href: 'mailto:'
-  title: 'Email'
-  fa-icon: 'fa-envelope'
+tiktok:
+  id: '@coelacant'
+  href: 'https://www.tiktok.com/'
+  title: 'TikTok'
+  fa-icon: 'fa-brands fa-tiktok'
   
 soundcloud:
   id: 'coelacant'
@@ -75,12 +63,6 @@ youtube:
   href: 'https://www.youtube.com/'
   title: 'YouTube'
   fa-icon: 'fa-youtube'
-
-applemusic:
-  id: 'us/album/ut-dr-covers/1507158033'
-  href: 'https://music.apple.com/'
-  title: 'Apple Music'
-  fa-icon: 'fa-solid fa-music'
   
 reddit:
   id: 'user/Coelacant1'
@@ -93,9 +75,3 @@ instagram:
   href: 'https://www.instagram.com/'
   title: 'Instagram'
   fa-icon: 'fa-instagram'
-  
-redbubble:
-  id: 'people/coelacant1'
-  href: 'https://www.redbubble.com/'
-  title: 'Redbubble'
-  fa-icon: 'fa-note-sticky'
