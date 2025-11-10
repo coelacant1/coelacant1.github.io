@@ -13,7 +13,7 @@ Check out my Bluesky here! <a href="https://bsky.app/profile/coelacant1.bsky.soc
 
 # What I do!
 * * *
-If you're here for art, I have high-resolution versions as well as other edits up and available on my <a href="https://www.patreon.com/coelacant1" title="Patreon"><i class="fa fa-brands fa-patreon" aria-hidden="true"></i></a>[  Patreon](https://www.patreon.com/coelacant1).<br><br>
+If you're here for art, I have high-resolution versions as well as other edits up and available on my <a href="https://www.patreon.com/coelacant1" title="Patreon"><i class="fa fa-brands fa-patreon" aria-hidden="true"></i></a>[  Patreon](https://www.patreon.com/coelacant1).<br> Or you can grab a YCH from my <a href="https://ko-fi.com/coelacant1" title="Ko-fi"><i class="fa fa-coffee" aria-hidden="true"></i></a>[  Ko-fi](https://ko-fi.com/coelacant1).<br><br>
 
 <img class="coela-logo" src="/assets/coela_nobg_crop2x.png" alt="CoelaSus" />
 
