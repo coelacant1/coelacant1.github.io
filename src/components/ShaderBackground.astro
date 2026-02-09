@@ -1,0 +1,222 @@
+---
+// Animated shader background with geometric pattern - mouse interactive with chromatic aberration
+---
+
+<div class="shader-bg" aria-hidden="true">
+  <canvas id="shader-canvas"></canvas>
+</div>
+
+<button id="shader-toggle" class="shader-toggle" aria-label="Toggle background effect">
+  <svg id="shader-icon-on" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+    <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+  </svg>
+  <svg id="shader-icon-off" viewBox="0 0 24 24" fill="currentColor" width="20" height="20" class="hidden">
+    <path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/>
+  </svg>
+</button>
+
+<style>
+  .shader-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  
+  .shader-bg.disabled {
+    opacity: 0;
+  }
+  
+  #shader-canvas {
+    width: 100%;
+    height: 100%;
+    pointer-events: auto;
+  }
+  
+  .shader-toggle {
+    position: fixed;
+    top: 0.625rem;
+    right: 1rem;
+    z-index: 150;
+    padding: 0.5rem;
+    background: rgba(30, 30, 30, 0.8);
+    border: 1px solid rgba(248, 160, 194, 0.3);
+    border-radius: 0.5rem;
+    color: #f8a0c2;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .shader-toggle:hover {
+    background: rgba(248, 160, 194, 0.2);
+    border-color: rgba(248, 160, 194, 0.6);
+  }
+  
+  .shader-toggle .hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  const canvas = document.getElementById('shader-canvas') as HTMLCanvasElement;
+  const ctx = canvas.getContext('2d');
+  const shaderBg = document.querySelector('.shader-bg');
+  const toggleBtn = document.getElementById('shader-toggle');
+  const iconOn = document.getElementById('shader-icon-on');
+  const iconOff = document.getElementById('shader-icon-off');
+  
+  let width: number, height: number;
+  let time = 0;
+  let mouseX = 0.5;
+  let mouseY = 0.5;
+  let targetMouseX = 0.5;
+  let targetMouseY = 0.5;
+  let velocityX = 0;
+  let velocityY = 0;
+  let isEnabled = true;
+  
+  // Toggle shader
+  toggleBtn?.addEventListener('click', () => {
+    isEnabled = !isEnabled;
+    shaderBg?.classList.toggle('disabled', !isEnabled);
+    iconOn?.classList.toggle('hidden', !isEnabled);
+    iconOff?.classList.toggle('hidden', isEnabled);
+  });
+  
+  function resize() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }
+  
+  function handleMouseMove(e: MouseEvent) {
+    targetMouseX = e.clientX / width;
+    targetMouseY = e.clientY / height;
+  }
+  
+  function drawLayer(offsetX: number, offsetY: number, color: string, isBase: boolean = false) {
+    if (!ctx) return;
+    
+    // Fixed cell size - no horizontal scaling
+    const cellSize = 50;
+    const cols = Math.ceil(width / cellSize) + 2;
+    const rows = Math.ceil(height / cellSize) + 2;
+    
+    const mouseInfluenceRadius = Math.max(width, height) * 0.4;
+    const mousePxX = mouseX * width;
+    const mousePxY = mouseY * height;
+    
+    for (let i = 0; i < cols; i++) {
+      for (let j = 0; j < rows; j++) {
+        const baseX = i * cellSize;
+        const baseY = j * cellSize;
+        
+        // Distance from mouse for blur/aberration calculation
+        const pdx = baseX - mousePxX;
+        const pdy = baseY - mousePxY;
+        const dist = Math.sqrt(pdx * pdx + pdy * pdy);
+        const maxDist = Math.sqrt(width * width + height * height);
+        const distRatio = dist / maxDist;
+        
+        // Chromatic aberration - offset increases with distance from mouse
+        const aberrationStrength = isBase ? 0 : distRatio * 1.5;
+        const x = baseX + offsetX * aberrationStrength * 8;
+        const y = baseY + offsetY * aberrationStrength * 8;
+        
+        const mouseInfluence = Math.max(0, 1 - dist / mouseInfluenceRadius);
+        
+        // Create wave effect with mouse influence
+        const wave = Math.sin(time * 0.5 + i * 0.3 + j * 0.2 + mouseInfluence * 3) * 0.5 + 0.5;
+        const wave2 = Math.cos(time * 0.3 + i * 0.2 - j * 0.4 + mouseInfluence * 2) * 0.5 + 0.5;
+        
+        // INVERTED: Alpha decreases near mouse (darker near cursor)
+        const baseAlpha = wave * wave2 * 0.5;
+        const focusDim = mouseInfluence * 0.4; // Subtract instead of add
+        const chromaticIntensity = isBase ? 1 : (0.4 + distRatio * 0.4);
+        const alpha = Math.max(0.05, (baseAlpha - focusDim)) * chromaticIntensity;
+        
+        ctx.save();
+        ctx.translate(x + cellSize / 2, y + cellSize / 2);
+        
+        // Rotation influenced by mouse
+        const baseRotation = time * 0.1 + (i + j) * 0.1;
+        const mouseRotation = mouseInfluence * Math.atan2(pdy, pdx);
+        ctx.rotate(baseRotation + mouseRotation * 0.5);
+        
+        // INVERTED: Size decreases near mouse (smaller near cursor)
+        const baseSize = cellSize * 0.3 * (0.5 + wave * 0.5);
+        const size = baseSize * (1 - mouseInfluence * 0.6);
+        
+        // Draw diamond shape
+        ctx.beginPath();
+        ctx.moveTo(0, -size);
+        ctx.lineTo(size, 0);
+        ctx.lineTo(0, size);
+        ctx.lineTo(-size, 0);
+        ctx.closePath();
+        
+        ctx.strokeStyle = color;
+        ctx.globalAlpha = Math.min(alpha, 0.9);
+        ctx.lineWidth = Math.max(0.5, 1.5 - mouseInfluence * 1);
+        ctx.stroke();
+        
+        // Draw connecting lines (dimmer near mouse)
+        if (i < cols - 1 && j < rows - 1) {
+          ctx.beginPath();
+          ctx.moveTo(size * 0.7, size * 0.7);
+          ctx.lineTo(cellSize - size * 0.7, cellSize - size * 0.7);
+          ctx.globalAlpha = Math.max(0.02, (alpha * 0.2 - mouseInfluence * 0.1)) * (isBase ? 1 : chromaticIntensity);
+          ctx.stroke();
+        }
+        
+        ctx.restore();
+      }
+    }
+  }
+  
+  function draw() {
+    if (!ctx || !isEnabled) {
+      requestAnimationFrame(draw);
+      return;
+    }
+    
+    // Smooth mouse movement with velocity damping
+    const dx = targetMouseX - mouseX;
+    const dy = targetMouseY - mouseY;
+    velocityX += dx * 0.008;
+    velocityY += dy * 0.008;
+    velocityX *= 0.92;
+    velocityY *= 0.92;
+    mouseX += velocityX;
+    mouseY += velocityY;
+    
+    ctx.clearRect(0, 0, width, height);
+    
+    // Draw chromatic aberration layers (RGB separation) - more saturated colors
+    // Red/magenta channel - offset to top-left
+    drawLayer(-1, -1, '#ff4d88', false);
+    // Cyan/blue channel - offset to bottom-right  
+    drawLayer(1, 1, '#4d88ff', false);
+    // Base pink layer (sharp, no offset)
+    drawLayer(0, 0, '#f8a0c2', true);
+    
+    time += 0.016;
+    requestAnimationFrame(draw);
+  }
+  
+  resize();
+  window.addEventListener('resize', resize);
+  window.addEventListener('mousemove', handleMouseMove);
+  
+  targetMouseX = 0.5;
+  targetMouseY = 0.5;
+  
+  draw();
+</script>

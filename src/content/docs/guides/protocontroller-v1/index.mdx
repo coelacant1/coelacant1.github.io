@@ -1,0 +1,40 @@
+---
+title: Protocontroller V1.1
+description: WS2812 LED controller with ESP32 wireless support for Protogen projects
+slug: guides/protocontroller-v1
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+The Protocontroller V1.1 is a specialized LED controller board designed for WS2812-based Protogen projects, featuring dual-microcontroller architecture with Teensy 4.0 and ESP32.
+
+## Key Features
+
+- **Teensy 4.0 Core**: High-performance microcontroller for LED animation
+- **ESP32 WROVER**: Integrated Bluetooth/WiFi for wireless control and communication
+- **WS2812 Support**: Control up to 8 LED strips with 500 pixels each
+- **I2C/SPI Breakouts**: Connections for sensors on both Teensy and ESP32
+- **USB Programming**: Integrated CP2104 FTDI for ESP32 programming
+
+:::note[Hardware Limitations]
+The Protocontroller V1.1 **only supports WS2812 LEDs**. For HUB75 panels or APA102 LEDs, use the [Protocontroller V2](/guides/protocontroller-v2/).
+:::
+
+---
+
+## Documentation
+
+<CardGrid>
+  <LinkCard title="Information" description="Pinout, power setup, and programming" href="/guides/protocontroller-v1/information/" />
+  <LinkCard title="Schematic" description="Full electrical schematic" href="/guides/protocontroller-v1/schematic/" />
+  <LinkCard title="Board Layout" description="PCB layers and physical design" href="/guides/protocontroller-v1/board-layout/" />
+  <LinkCard title="Wiring" description="Sensor and LED wiring diagrams" href="/guides/protocontroller-v1/wiring/" />
+</CardGrid>
+
+---
+
+## Related Resources
+
+- [WS35 Kit Guide](/guides/ws35/) - LED panel information and sensor setup
+- [Protogen Electronics](/resources/electronics/) - Open-source PCB files
+- [ProtoTracer Helpers](/resources/prototracer-helpers/) - Convert 3D models and images

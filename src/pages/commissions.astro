@@ -1,0 +1,226 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import Lightbox from '../components/Lightbox.astro';
+
+// YCH Examples (blank template + finished examples)
+const ychExamples = [
+  {
+    title: 'Gift Wrapped YCH',
+    description: 'Your character wrapped up as a cute gift!',
+    blankImage: '/images/commissions/gift-wrapped-ych.jpg',
+    examples: [
+      '/images/commissions/gift-wrapped-example-1.jpg',
+      '/images/commissions/gift-wrapped-example2.jpg',
+    ],
+  },
+  {
+    title: 'Paw Shot YCH',
+    description: 'Cute paw-focused YCH for your character.',
+    blankImage: '/images/commissions/paw-shot-ych.jpg',
+    examples: [
+      '/images/commissions/paw-shot-example-1.jpg',
+      '/images/commissions/paw-shot-example2.jpg',
+    ],
+  },
+  {
+    title: 'Spread YCH',
+    description: 'Dynamic spread pose for your character.',
+    blankImage: '/images/commissions/spread-ych.jpg',
+    examples: [
+      '/images/commissions/spread-example-1.jpg',
+    ],
+    isAuction: true,
+  },
+];
+---
+
+<BaseLayout title="Coela Can't! - Commissions">
+  <div class="min-h-screen flex flex-col">
+    <SiteHeader />
+
+    <!-- Main Content -->
+    <main class="flex-1 px-4 py-12 max-w-6xl mx-auto w-full">
+      <h1 class="text-4xl md:text-5xl font-bold text-primary mb-4 text-center">
+        Commissions
+      </h1>
+      <p class="text-center text-white/70 mb-8 max-w-2xl mx-auto">
+        Custom artwork, character designs, and more! Check out the options below and reach out to discuss your project.
+      </p>
+
+      <!-- Ko-fi CTA -->
+      <div class="text-center mb-12">
+        <a href="https://ko-fi.com/coelacant1/shop" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#ff5e5b] to-[#ff7b79] text-white font-bold text-lg rounded-xl hover:from-[#ff4742] hover:to-[#ff6563] transition-all shadow-lg hover:shadow-xl hover:scale-105">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.034-3.954-.709-.965-1.041-2.7-.091-3.71.951-1.01 3.005-1.086 4.363.407 0 0 1.565-1.782 3.468-.963 1.904.82 1.832 3.011.723 4.311zm6.173.478c-.928.116-1.682.028-1.682.028V7.284h1.77s1.971.551 1.971 2.638c0 1.913-.985 2.667-2.059 3.015z"/>
+          </svg>
+          Check YCH Availability on Ko-fi
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          </svg>
+        </a>
+      </div>
+
+      <!-- YCH Section -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-primary mb-6 border-b border-primary/30 pb-2">
+          YCH (Your Character Here)
+        </h2>
+        <p class="text-white/70 mb-8">
+          Pre-made poses and compositions where your character is placed. Here are some examples of past work!
+        </p>
+        
+        <div class="space-y-8">
+          {ychExamples.map((ych) => (
+            <div class="bg-surface/30 border border-primary/20 rounded-xl p-6">
+              <div class="flex items-center gap-3 mb-2">
+                <h3 class="text-xl font-bold text-primary">{ych.title}</h3>
+                {ych.isAuction && (
+                  <span 
+                    class="px-2 py-1 text-xs font-semibold bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded cursor-help"
+                    title="This YCH is not available for regular commission - it was sold via auction only"
+                  >
+                    Auction Only
+                  </span>
+                )}
+              </div>
+              <p class="text-white/70 mb-4">{ych.description}</p>
+              
+              <div class={`grid gap-4 ${ych.examples.length === 1 ? 'grid-cols-2' : 'grid-cols-3'}`}>
+                <div class="space-y-2">
+                  <div 
+                    class="aspect-square bg-surface/50 rounded-lg overflow-hidden border-2 border-primary/30 cursor-pointer hover:border-primary/60 transition-all"
+                    data-lightbox={ych.blankImage}
+                    data-title={`${ych.title} - Template`}
+                  >
+                    <img src={ych.blankImage} alt={`${ych.title} - Template`} 
+                         class="w-full h-full object-cover hover:scale-105 transition-transform" />
+                  </div>
+                  <p class="text-center text-white/50 text-xs">YCH Template</p>
+                </div>
+                {ych.examples.map((img, i) => (
+                  <div class="space-y-2">
+                    <div 
+                      class="aspect-square bg-surface/50 rounded-lg overflow-hidden cursor-pointer hover:border-2 hover:border-primary/40 transition-all"
+                      data-lightbox={img}
+                      data-title={`${ych.title} - Example ${i + 1}`}
+                    >
+                      <img src={img} alt={`${ych.title} - Example ${i + 1}`} 
+                           class="w-full h-full object-cover hover:scale-105 transition-transform" />
+                    </div>
+                    <p class="text-center text-white/50 text-xs">Finished Example</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Custom Commissions Section -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-primary mb-6 border-b border-primary/30 pb-2">
+          Custom Commissions
+        </h2>
+        <p class="text-white/70 mb-8">
+          Looking for something specific? Contact me to discuss custom artwork, character designs, and more!
+        </p>
+        
+        <div class="bg-surface/30 border border-primary/20 rounded-xl p-8 text-center">
+          <p class="text-white/70 mb-6">
+            Custom commissions are handled directly through Discord or Telegram. 
+            Pricing varies based on complexity.
+            You can see the current commission status on my Twitter and Bsky pages.
+          </p>
+          <div class="flex justify-center gap-4 flex-wrap">
+            <a href="https://discord.com/users/705655222076178503" target="_blank" rel="noopener noreferrer" 
+               class="inline-flex items-center gap-2 px-6 py-3 bg-primary/20 border border-primary/50 rounded-lg text-primary hover:bg-primary/30 transition-all">
+              Contact on Discord
+            </a>
+            <a href="https://t.me/coelacant1" target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center gap-2 px-6 py-3 bg-primary/20 border border-primary/50 rounded-lg text-primary hover:bg-primary/30 transition-all">
+              Contact on Telegram
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- How to Order -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-primary mb-6 border-b border-primary/30 pb-2">
+          How to Order
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-surface/30 border border-primary/20 rounded-xl p-6">
+            <h3 class="text-xl font-bold text-primary mb-4">YCH Commissions</h3>
+            <ol class="space-y-3 text-white/70">
+              <li class="flex gap-3">
+                <span class="text-primary font-bold">1.</span>
+                <span>Browse YCHs above or on Ko-fi</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-primary font-bold">2.</span>
+                <span>Click an item to purchase</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-primary font-bold">3.</span>
+                <span>Include character reference and contact info</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-primary font-bold">4.</span>
+                <span>I'll reach out for info and to send the first sketch</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-primary font-bold">5.</span>
+                <span>Receive your finished art!</span>
+              </li>
+            </ol>
+          </div>
+          <div class="bg-surface/30 border border-primary/20 rounded-xl p-6">
+            <h3 class="text-xl font-bold text-primary mb-4">Custom Commissions</h3>
+            <ol class="space-y-3 text-white/70">
+              <li class="flex gap-3">
+                <span class="text-primary font-bold">1.</span>
+                <span>Contact me on Discord or Telegram</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-primary font-bold">2.</span>
+                <span>Discuss your idea and get a quote</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-primary font-bold">3.</span>
+                <span>Pay via PayPal or agreed method</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-primary font-bold">4.</span>
+                <span>Get WIP updates and final art!</span>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- Terms of Service -->
+      <section class="bg-surface/30 border border-primary/20 rounded-xl p-6">
+        <h2 class="text-2xl font-bold text-primary mb-4">Terms of Service</h2>
+        <ul class="space-y-2 text-white/70">
+          <li>• Payment is required upfront before work begins</li>
+          <li>• I reserve the right to decline any commission</li>
+          <li>• Refunds available before work begins; partial refund if WIP started</li>
+          <li>• You may use the finished art for personal use unless otherwise agreed</li>
+          <li>• Commercial use requires separate licensing agreement</li>
+          <li>• I retain the right to post the finished work to my portfolio</li>
+        </ul>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-6 text-center text-text-light/50 border-t border-primary/20">
+      © 2026 Coela Can't! All rights reserved.
+    </footer>
+  </div>
+  
+  <Lightbox />
+</BaseLayout>

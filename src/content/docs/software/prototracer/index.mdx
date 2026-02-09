@@ -1,0 +1,192 @@
+---
+title: ProtoTracer
+description: Real-time 3D rendering engine for Protogen LED displays
+slug: software/prototracer
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+ProtoTracer is a real-time 3D rendering and animation engine designed for microcontrollers. It powers the animated LED displays on many Protogen builds!
+
+## Documentation
+
+<CardGrid>
+  <LinkCard title="Getting Started" description="Hardware requirements and initial setup" href="/software/prototracer/getting-started/" />
+  <LinkCard title="Compiling & Uploading" description="Build and upload with PlatformIO" href="/software/prototracer/compiling/" />
+  <LinkCard title="Voice Calibration" description="Formant frequency calibration for visemes" href="/software/prototracer/voice-calibration/" />
+  <LinkCard title="Firmware Uploader" description="Web-based Teensy firmware upload tool" href="/software/prototracer/firmware-uploader/" />
+  <LinkCard title="Customization" description="Modifying ProtoTracer for your project" href="/software/prototracer/customization/" />
+</CardGrid>
+
+---
+
+## Overview
+
+ProtoTracer enables complex 3D animations and effects on resource-constrained hardware like the Teensy 4.0/4.1. It's specifically designed for creating expressive Protogen visors with smooth animations.
+
+### Key Features
+
+- **Real-time 3D rendering** on Teensy 4.0/4.1
+- **64x32 HUB75 panel support** for high-resolution displays
+- **WS2812B LED support** via WS35 boards
+- **OBJ file rendering** with texture support
+- **Built-in animation engine** with various effects
+- **Sensor integration** for reactive animations (microphone, boop sensor, gyroscope)
+
+---
+
+## Supported Hardware
+
+### Microcontrollers
+| Controller | Status |
+|------------|--------|
+| Teensy 4.0 | ✅ Officially Supported |
+| Teensy 4.1 | ✅ Officially Supported |
+| ESP32 | ❌ Not Compatible |
+| Raspberry Pi | ❌ Not Compatible |
+| Arduino Nano/Uno/Mega | ❌ Not Compatible |
+
+### LED Panels
+- **HUB75 Panels**: Two 64x32 RGB LED matrices
+- **WS35 Boards**: Custom WS2812B-based LED panels
+
+### Controller Boards
+- **SmartMatrix V4 LED Shield** - For HUB75 panels
+- **OctoWS2811 Board** - For WS2812B strips
+- **Protocontroller V1** - For WS35 kits
+- **Protocontroller V2** - Universal controller (recommended)
+
+---
+
+## Project Environments
+
+ProtoTracer uses PlatformIO with pre-configured build environments:
+
+| Environment | Description |
+|-------------|-------------|
+| `teensy40hub75` | Teensy 4.0 with HUB75 panels |
+| `teensy40ws35` | Teensy 4.0 with WS35 LED boards |
+| `teensy40beta` | Teensy 4.0 Beta Protogen configuration |
+| `teensy41hub75` | Teensy 4.1 with HUB75 panels |
+| `teensy41ws35` | Teensy 4.1 with WS35 LED boards |
+| `teensy41beta` | Teensy 4.1 Beta Protogen configuration |
+
+### Required Libraries
+
+ProtoTracer automatically installs these dependencies via PlatformIO:
+- SmartMatrix (HUB75 support)
+- OctoWS2811 (WS2812B support)
+- Adafruit APDS9960 (Boop sensor)
+- Adafruit BNO055 (IMU/Gyroscope)
+- Adafruit SSD1306 (OLED display)
+- SerialTransfer (ESP32 communication)
+
+---
+
+## Architecture
+
+ProtoTracer is organized into several modules:
+
+| Module | Purpose |
+|--------|---------|
+| `Animation` | Animation timing and blendshape control |
+| `Assets` | 3D models, images, and materials |
+| `Camera` | Virtual camera and pixel mapping |
+| `Controller` | Hardware abstraction for different platforms |
+| `Engine` | Core rendering engine |
+| `ExternalDevices` | Sensor drivers and communication |
+| `Physics` | Physics simulation for animations |
+| `Renderer` | Rasterization and display output |
+| `Scene` | Scene graph and object management |
+| `Utils` | Math, color, and utility functions |
+
+---
+
+## Quick Start
+
+### 1. Install Tools
+
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [TeensyDuino](https://www.pjrc.com/teensy/td_download.html)
+- PlatformIO IDE extension for VS Code
+
+### 2. Clone Repository
+
+```bash
+git clone https://github.com/coelacant1/ProtoTracer.git
+cd ProtoTracer
+```
+
+### 3. Select Environment
+
+Open PlatformIO and select your target environment (e.g., `teensy40hub75`).
+
+### 4. Build and Upload
+
+Build the project and upload to your Teensy.
+
+---
+
+## Alternatives
+
+If ProtoTracer is too complex for your needs, consider these alternatives:
+
+### Huidu WF-1
+- ✅ RGB, works with HUB75 panels
+- ✅ Easy Wi-Fi configuration, quick setup with an app
+- ❌ Limited to static images, GIFs, and slideshows
+- ❌ No interactivity with sensors or buttons
+
+### MAX7219-based Designs
+- ✅ Affordable and widely available
+- ✅ Compatible with Arduino Nano or similar controllers
+- ✅ Interactive depending on firmware
+- ✅ Low power consumption compared to HUB75 designs
+- ❌ Single-color, on/off pixels only
+- ❌ Requires significant soldering
+
+---
+
+## PTX Engine (Next Generation)
+
+:::caution[Work in Progress]
+**PTX Engine** is the next-generation version of ProtoTracer, currently under active development. It features:
+
+- Header-first C++17 library design
+- Cross-platform support (MCUs and desktop)
+- Runtime reflection system
+- Python bindings for development/testing
+
+PTX Engine is not yet ready for production use. Continue using ProtoTracer for current projects.
+
+[View PTX Engine on GitHub](https://github.com/coelacant1/PTXEngine)
+:::
+
+---
+
+## Support
+
+- **GitHub Discussions**: For questions and feature requests
+- **Discord Server**: [Join the community](https://discord.gg/YwaWnhJ)
+- **Patreon**: [Support development](https://www.patreon.com/coelacant1)
+
+:::note
+This is a free, open-source project. Dedicated support is not guaranteed. For custom setups, expect to troubleshoot independently or with community help.
+:::
+
+---
+
+## License
+
+ProtoTracer is licensed under **AGPL-3.0**. If you modify and distribute the software, you must make your changes publicly available.
+
+---
+
+## Related Resources
+
+- [ProtoTracer Helpers](/resources/prototracer-helpers/) - Convert 3D models, images, and GIFs
+- [Protogen Electronics](/resources/electronics/) - PCB designs and schematics
+- [Protogen 3D Prints](/resources/3d-prints/) - Free STL files for heads
+- [HUB75 Kit Guide](/guides/hub75/) - HUB75 panel wiring
+- [WS35 Kit Guide](/guides/ws35/) - WS35 LED panel wiring
+- [Protocontroller V2 Guide](/guides/protocontroller-v2/) - Controller setup

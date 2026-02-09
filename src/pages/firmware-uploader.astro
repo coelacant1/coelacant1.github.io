@@ -1,0 +1,1249 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+---
+
+<BaseLayout title="Firmware Uploader - ProtoTracer">
+  <div class="min-h-screen flex flex-col">
+    <SiteHeader />
+    
+    <main class="flex-1 container mx-auto px-4 py-8 max-w-4xl">
+    <a href="/software/prototracer/" class="text-pink-400 hover:text-pink-300 mb-4 inline-block">
+      ← Back to ProtoTracer Docs
+    </a>
+    
+    <h1 class="text-3xl font-bold text-white mb-4">ProtoTracer Firmware Uploader</h1>
+    
+    <p class="text-gray-300 mb-6">
+      Upload ProtoTracer firmware directly to your Teensy 4.0 or 4.1 from your browser using WebHID.
+    </p>
+    
+    <div class="bg-yellow-900/30 border border-yellow-600 rounded-lg p-4 mb-6">
+      <p class="text-yellow-200">
+        <strong>⚠️ Browser Requirements:</strong> This tool requires a browser that supports 
+        <strong>WebHID</strong> (Chrome, Edge, or Opera). Safari and Firefox are not supported.
+      </p>
+    </div>
+
+    <div class="bg-neutral-800 rounded-lg p-6 mb-6">
+      <h2 class="text-xl font-semibold text-white mb-4">Instructions</h2>
+      <ol class="list-decimal list-inside text-gray-300 space-y-2">
+        <li><strong>Download firmware</strong> - Get the latest release from GitHub</li>
+        <li><strong>Upload file</strong> - Select the <code>.hex</code> or <code>.zip</code> file</li>
+        <li><strong>Press reset on Teensy</strong> - The LED should turn red (bootloader mode)</li>
+        <li><strong>Click "Select Device"</strong> - Choose your Teensy from the device list</li>
+        <li><strong>Click "Upload Firmware"</strong> - Wait for the upload to complete</li>
+      </ol>
+    </div>
+
+    <!-- Download Section -->
+    <div class="bg-neutral-800 rounded-lg p-6 mb-6">
+      <h2 class="text-xl font-semibold text-white mb-4">Step 1: Download Firmware</h2>
+      <p class="text-gray-300 mb-4">Download the latest ProtoTracer firmware from GitHub Releases:</p>
+      <a id="release-url" href="https://github.com/coelacant1/ProtoTracer/releases/latest" target="_blank" rel="noopener"
+         class="inline-block px-6 py-3 bg-pink-500 text-black font-semibold rounded hover:bg-pink-400 transition">
+        <span id="release-text">Download Latest Release</span>
+      </a>
+      <p class="text-gray-400 text-sm mt-3">
+        Download the <code>.zip</code> file containing all firmware variants, or a specific <code>.hex</code> file for your hardware.
+      </p>
+    </div>
+
+    <!-- Firmware Uploader -->
+    <div id="uploader" class="bg-neutral-800 rounded-lg p-6 mb-6">
+      <h2 class="text-xl font-semibold text-white mb-4">Step 2: Upload Firmware</h2>
+      
+      <div class="mb-4">
+        <label class="block text-gray-300 mb-2">Select firmware file (.hex or .zip):</label>
+        <input type="file" id="firmware" accept=".hex,.zip" 
+               class="w-full p-3 rounded bg-neutral-700 text-white border border-neutral-600 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-pink-500 file:text-black file:font-semibold hover:file:bg-pink-400" />
+      </div>
+
+      <!-- Firmware selection from ZIP -->
+      <div id="zip-contents" class="mb-4 hidden">
+        <label class="block text-gray-300 mb-2">Select firmware from archive:</label>
+        <select id="hex-select" class="w-full p-3 rounded bg-neutral-700 text-white border border-neutral-600 focus:border-pink-500 focus:outline-none">
+          <option value="">Choose a firmware file...</option>
+        </select>
+      </div>
+
+      <div class="flex gap-3 mb-4">
+        <button id="select-device" class="px-4 py-2 bg-pink-500 text-black font-semibold rounded hover:bg-pink-400 transition">
+          Select Device
+        </button>
+        <button id="upload" disabled class="px-4 py-2 bg-pink-500 text-black font-semibold rounded hover:bg-pink-400 transition disabled:opacity-50 disabled:cursor-not-allowed">
+          Upload Firmware
+        </button>
+      </div>
+
+      <progress id="progress" value="0" max="1" class="w-full h-6 mb-2 rounded overflow-hidden [&::-webkit-progress-bar]:bg-neutral-700 [&::-webkit-progress-value]:bg-pink-500 [&::-moz-progress-bar]:bg-pink-500"></progress>
+      
+      <p id="status" class="text-gray-400 italic">Select a firmware file to begin.</p>
+    </div>
+
+    <!-- Serial Monitor -->
+    <div id="serial" class="bg-neutral-800 rounded-lg p-6 mb-6">
+      <h2 class="text-xl font-semibold text-white mb-4">Serial Monitor</h2>
+      
+      <div class="flex gap-3 mb-4">
+        <button id="open-serial" class="px-4 py-2 bg-pink-500 text-black font-semibold rounded hover:bg-pink-400 transition">
+          Open Serial Port
+        </button>
+        <button id="close-serial" class="px-4 py-2 bg-neutral-600 text-white font-semibold rounded hover:bg-neutral-500 transition">
+          Close Serial Port
+        </button>
+      </div>
+
+      <textarea id="serial-output" readonly placeholder="Serial output will appear here..."
+                class="w-full h-48 p-3 rounded bg-black text-green-400 font-mono border border-neutral-600 resize-y"></textarea>
+    </div>
+
+    <!-- Troubleshooting -->
+    <div class="bg-neutral-800 rounded-lg p-6 mb-6">
+      <h2 class="text-xl font-semibold text-white mb-4">Troubleshooting</h2>
+      
+      <h3 class="text-lg font-medium text-white mt-4 mb-2">Device not appearing</h3>
+      <ul class="list-disc list-inside text-gray-300 space-y-1">
+        <li>Make sure you pressed the reset button on the Teensy (LED should be red)</li>
+        <li>Try a different USB cable or port</li>
+        <li>Ensure no other application is using the Teensy</li>
+      </ul>
+
+      <h3 class="text-lg font-medium text-white mt-4 mb-2">Upload fails</h3>
+      <ul class="list-disc list-inside text-gray-300 space-y-1">
+        <li>Check that you selected the correct firmware for your hardware</li>
+        <li>Verify the Teensy is in bootloader mode (red LED)</li>
+        <li>Try pressing reset again and re-selecting the device</li>
+      </ul>
+    </div>
+
+    <div class="bg-neutral-800 rounded-lg p-6">
+      <h2 class="text-xl font-semibold text-white mb-4">Alternative: Manual Upload</h2>
+      <p class="text-gray-300">
+        If the web uploader doesn't work for you, use 
+        <a href="https://www.pjrc.com/teensy/loader.html" target="_blank" class="text-pink-400 hover:text-pink-300">Teensy Loader</a> 
+        from PJRC.
+      </p>
+    </div>
+  </main>
+</BaseLayout>
+
+<script>
+import JSZip from 'jszip';
+</script>
+
+<script>
+/************************************************************
+ *  ProtoTracer Firmware Uploader
+ *  - Local file load (.hex or .zip)
+ *  - Intel HEX parsing -> 1KB blocks
+ *  - WebHID upload to Teensy bootloader
+ *  - Serial open/close
+ ************************************************************/
+
+// ===== DOM Elements / Globals =====
+const statusElement = document.getElementById("status");
+const progressElement = document.getElementById("progress") as HTMLProgressElement;
+const outputBox = document.getElementById("serial-output") as HTMLTextAreaElement;
+const firmwareInput = document.getElementById("firmware") as HTMLInputElement;
+const zipContentsDiv = document.getElementById("zip-contents");
+const hexSelect = document.getElementById("hex-select") as HTMLSelectElement;
+
+let firmwareFile: Uint8Array | null = null;
+let firmwareFileName: string | null = null;
+let zipArchive: any = null;
+let device: HIDDevice | null = null;
+let serialPort: SerialPort | null = null;
+let serialReader: ReadableStreamDefaultReader<string> | null = null;
+const outputBuffer: string[] = [];
+let incompleteLine = "";
+
+// GitHub API URL for ProtoTracer releases
+const githubReleasesUrl = "https://api.github.com/repos/coelacant1/ProtoTracer/releases/latest";
+
+// ===== Utility Functions =====
+function setStatus(message: string) {
+    if (statusElement) statusElement.textContent = message;
+}
+
+function appendOutput(message: string) {
+    outputBuffer.push(message);
+    if (outputBuffer.length > 20) {
+        outputBuffer.shift();
+    }
+    if (outputBox) {
+        outputBox.value = outputBuffer.join("\n");
+        outputBox.scrollTop = outputBox.scrollHeight;
+    }
+}
+
+function sleep(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// Fetch latest release info to update the download link
+async function fetchLatestRelease() {
+    try {
+        const response = await fetch(githubReleasesUrl);
+        if (!response.ok) return;
+
+        const releaseData = await response.json();
+        const releaseUrl = document.getElementById("release-url") as HTMLAnchorElement;
+        const releaseText = document.getElementById("release-text");
+        
+        if (releaseUrl && releaseData.html_url) {
+            releaseUrl.href = releaseData.html_url;
+        }
+        if (releaseText && releaseData.tag_name) {
+            releaseText.textContent = `Download ${releaseData.tag_name}`;
+        }
+    } catch (error) {
+        console.error("Could not fetch release info:", error);
+    }
+}
+
+fetchLatestRelease();
+
+// Handle file upload (.hex or .zip)
+firmwareInput?.addEventListener("change", async (event) => {
+    const target = event.target as HTMLInputElement;
+    const file = target.files?.[0];
+    
+    if (!file) {
+        firmwareFile = null;
+        firmwareFileName = null;
+        zipArchive = null;
+        zipContentsDiv?.classList.add('hidden');
+        setStatus("No firmware file selected.");
+        return;
+    }
+
+    const fileName = file.name.toLowerCase();
+    
+    if (fileName.endsWith('.zip')) {
+        // Handle ZIP file
+        try {
+            setStatus("Reading ZIP archive...");
+            const arrayBuffer = await file.arrayBuffer();
+            const JSZip = (await import('jszip')).default;
+            zipArchive = await JSZip.loadAsync(arrayBuffer);
+            
+            // Find all .hex files in the archive
+            const hexFiles: string[] = [];
+            zipArchive.forEach((relativePath: string, zipEntry: any) => {
+                if (relativePath.toLowerCase().endsWith('.hex') && !zipEntry.dir) {
+                    hexFiles.push(relativePath);
+                }
+            });
+            
+            if (hexFiles.length === 0) {
+                setStatus("No .hex files found in the ZIP archive.");
+                zipArchive = null;
+                return;
+            }
+            
+            // Populate the dropdown
+            if (hexSelect) {
+                hexSelect.innerHTML = '<option value="">Choose a firmware file...</option>';
+                hexFiles.sort().forEach(hexFile => {
+                    const option = document.createElement("option");
+                    option.value = hexFile;
+                    // Show just the filename, not the full path
+                    option.textContent = hexFile.split('/').pop() || hexFile;
+                    hexSelect.appendChild(option);
+                });
+            }
+            
+            zipContentsDiv?.classList.remove('hidden');
+            setStatus(`Found ${hexFiles.length} firmware file(s) in archive. Select one to upload.`);
+            
+        } catch (error) {
+            console.error(error);
+            setStatus("Error reading ZIP file.");
+            zipArchive = null;
+        }
+    } else if (fileName.endsWith('.hex')) {
+        // Handle direct .hex file
+        zipContentsDiv?.classList.add('hidden');
+        zipArchive = null;
+        
+        const reader = new FileReader();
+        reader.onload = () => {
+            firmwareFile = new Uint8Array(reader.result as ArrayBuffer);
+            firmwareFileName = file.name.toLowerCase();
+            setStatus(`Firmware loaded: ${firmwareFileName}`);
+            const uploadBtn = document.getElementById("upload") as HTMLButtonElement;
+            if (uploadBtn) uploadBtn.disabled = false;
+        };
+        reader.onerror = () => {
+            setStatus("Error reading the firmware file.");
+        };
+        reader.readAsArrayBuffer(file);
+    } else {
+        setStatus("Please select a .hex or .zip file.");
+    }
+});
+
+// Handle selection from ZIP dropdown
+hexSelect?.addEventListener("change", async (event) => {
+    const target = event.target as HTMLSelectElement;
+    const selectedFile = target.value;
+    
+    if (!selectedFile || !zipArchive) {
+        firmwareFile = null;
+        firmwareFileName = null;
+        const uploadBtn = document.getElementById("upload") as HTMLButtonElement;
+        if (uploadBtn) uploadBtn.disabled = true;
+        return;
+    }
+    
+    try {
+        setStatus("Extracting firmware from archive...");
+        const hexData = await zipArchive.file(selectedFile).async("uint8array");
+        firmwareFile = hexData;
+        firmwareFileName = selectedFile.split('/').pop()?.toLowerCase() || selectedFile.toLowerCase();
+        setStatus(`Firmware loaded: ${firmwareFileName}`);
+        const uploadBtn = document.getElementById("upload") as HTMLButtonElement;
+        if (uploadBtn) uploadBtn.disabled = false;
+    } catch (error) {
+        console.error(error);
+        setStatus("Error extracting firmware from archive.");
+    }
+});
+
+// Select Teensy device
+document.getElementById("select-device")?.addEventListener("click", async () => {
+    try {
+        const devices = await navigator.hid.requestDevice({
+            filters: [
+                { vendorId: 0x16C0, productId: 0x0478 }, // Teensy 4.0
+                { vendorId: 0x16C0, productId: 0x0479 }  // Teensy 4.1
+            ]
+        });
+
+        if (devices.length > 0) {
+            device = devices[0];
+            const deviceName = device.productName ||
+                (device.productId === 0x0478 ? "Teensy 4.0" :
+                 device.productId === 0x0479 ? "Teensy 4.1" : "Unknown");
+            setStatus(`Device selected: ${deviceName}`);
+        } else {
+            setStatus("No device selected.");
+        }
+    } catch (error) {
+        console.error(error);
+        setStatus("Failed to select device.");
+    }
+});
+
+// ===== Intel HEX Parsing Logic =====
+async function parseHexToBlocks(hexData: Uint8Array, blockSize: number, offset: number): Promise<Uint8Array[]> {
+    const text = new TextDecoder().decode(hexData);
+    const lines = text.split(/\r?\n/);
+    const blocks: (Uint8Array | undefined)[] = [];
+    let baseAddress = 0;
+
+    function ensureBlock(idx: number) {
+        if (!blocks[idx]) {
+            const block = new Uint8Array(blockSize);
+            block.fill(0xff);
+            blocks[idx] = block;
+        }
+    }
+
+    for (let lineNum = 0; lineNum < lines.length; lineNum++) {
+        let line = lines[lineNum].trim();
+        if (!line) continue;
+        if (!line.startsWith(':')) {
+            throw new Error(`Invalid HEX: missing ':' on line ${lineNum+1}`);
+        }
+
+        line = line.slice(1);
+        const length = parseInt(line.slice(0, 2), 16);
+        const address = parseInt(line.slice(2, 6), 16);
+        const recordType = parseInt(line.slice(6, 8), 16);
+        let cursor = 8;
+        let calcSum = length + ((address >> 8) & 0xFF) + (address & 0xFF) + recordType;
+
+        if (line.length !== (10 + length*2)) {
+            throw new Error(`Line length mismatch on line ${lineNum+1}`);
+        }
+
+        switch (recordType) {
+            case 0x00: {
+                const dataBytes = new Uint8Array(length);
+                for (let i = 0; i < length; i++) {
+                    const byteVal = parseInt(line.slice(cursor, cursor+2), 16);
+                    cursor += 2;
+                    dataBytes[i] = byteVal;
+                    calcSum += byteVal;
+                }
+
+                const checkSum = parseInt(line.slice(cursor, cursor+2), 16);
+                calcSum = (calcSum & 0xFF);
+                const total = (calcSum + checkSum) & 0xFF;
+                if (total !== 0) {
+                    throw new Error(`Checksum error on line ${lineNum+1}`);
+                }
+
+                let addr32 = baseAddress + address;
+                addr32 -= offset;
+
+                if (addr32 < 0) continue;
+
+                let dataIndex = 0;
+                while (dataIndex < dataBytes.length) {
+                    const blockIndex = Math.floor(addr32 / blockSize);
+                    ensureBlock(blockIndex);
+
+                    const blockStartAddr = blockIndex * blockSize;
+                    const withinBlockOffset = addr32 - blockStartAddr;
+                    const spaceInBlock = blockSize - withinBlockOffset;
+                    const toCopy = Math.min(spaceInBlock, dataBytes.length - dataIndex);
+
+                    blocks[blockIndex]!.set(
+                        dataBytes.subarray(dataIndex, dataIndex + toCopy),
+                        withinBlockOffset
+                    );
+
+                    dataIndex += toCopy;
+                    addr32 += toCopy;
+                }
+                break;
+            }
+            case 0x01: {
+                for (let i = 0; i < length; i++) {
+                    const byteVal = parseInt(line.slice(cursor, cursor+2), 16);
+                    cursor += 2;
+                    calcSum += byteVal;
+                }
+                const checkSum = parseInt(line.slice(cursor, cursor+2), 16);
+                calcSum = (calcSum & 0xFF);
+                const total = (calcSum + checkSum) & 0xFF;
+                if (total !== 0) {
+                    throw new Error(`Checksum error on EOF line ${lineNum+1}`);
+                }
+                break;
+            }
+            case 0x02: {
+                const highAddr = parseInt(line.slice(cursor, cursor+4), 16);
+                calcSum += ((highAddr >> 8) & 0xFF) + (highAddr & 0xFF);
+                cursor += 4;
+                const checkSum = parseInt(line.slice(cursor, cursor+2), 16);
+                calcSum = (calcSum & 0xFF);
+                if (((calcSum + checkSum) & 0xFF) !== 0) {
+                    throw new Error(`Checksum error on line ${lineNum+1}`);
+                }
+                baseAddress = highAddr << 4;
+                break;
+            }
+            case 0x04: {
+                const upper16 = parseInt(line.slice(cursor, cursor+4), 16);
+                calcSum += ((upper16 >> 8) & 0xFF) + (upper16 & 0xFF);
+                cursor += 4;
+                const checkSum = parseInt(line.slice(cursor, cursor+2), 16);
+                calcSum = (calcSum & 0xFF);
+                if (((calcSum + checkSum) & 0xFF) !== 0) {
+                    throw new Error(`Checksum error on line ${lineNum+1}`);
+                }
+                baseAddress = upper16 << 16;
+                break;
+            }
+            default: {
+                for (let i = 0; i < length; i++) {
+                    const byteVal = parseInt(line.slice(cursor, cursor+2), 16);
+                    cursor += 2;
+                    calcSum += byteVal;
+                }
+                const checkSum = parseInt(line.slice(cursor, cursor+2), 16);
+                calcSum = (calcSum & 0xFF);
+                if (((calcSum + checkSum) & 0xFF) !== 0) {
+                    throw new Error(`Checksum error on line ${lineNum+1}`);
+                }
+                break;
+            }
+        }
+    }
+
+    return blocks.filter((b): b is Uint8Array => b !== undefined);
+}
+
+async function buildFirmwareBlocks(fw: Uint8Array, fwName: string): Promise<Uint8Array[]> {
+    if (fwName.endsWith('.hex')) {
+        setStatus("Parsing Intel HEX...");
+        return await parseHexToBlocks(fw, 1024, 0x60000000);
+    } else {
+        setStatus("Treating file as raw 1KB pages");
+        const pages: Uint8Array[] = [];
+        for (let i = 0; i < fw.length; i += 1024) {
+            const chunk = fw.slice(i, i + 1024);
+            if (chunk.length < 1024) {
+                const padded = new Uint8Array(1024);
+                padded.fill(0xFF);
+                padded.set(chunk, 0);
+                pages.push(padded);
+            } else {
+                pages.push(chunk);
+            }
+        }
+        return pages;
+    }
+}
+
+// Upload firmware
+document.getElementById("upload")?.addEventListener("click", async () => {
+    if (!firmwareFile || !device || !firmwareFileName) {
+        setStatus("Please load a firmware file and select a device first.");
+        return;
+    }
+
+    const isTeensy40 = (device.productId === 0x0478) && firmwareFileName.includes("teensy40");
+    const isTeensy41 = (device.productId === 0x0479) && firmwareFileName.includes("teensy41");
+
+    if (!isTeensy40 && !isTeensy41) {
+        setStatus("Firmware file does not match the selected device. Upload canceled.");
+        return;
+    }
+
+    setStatus("Building firmware blocks...");
+    if (progressElement) progressElement.value = 0;
+
+    let blocks: Uint8Array[] = [];
+    try {
+        blocks = await buildFirmwareBlocks(firmwareFile, firmwareFileName);
+    } catch (err) {
+        console.error(err);
+        setStatus(`Failed to parse firmware file: ${err}`);
+        return;
+    }
+
+    setStatus("Uploading firmware...");
+    try {
+        await flashFirmware(blocks, device, progress => {
+            if (progressElement) progressElement.value = progress;
+        });
+        setStatus("Firmware uploaded successfully!");
+    } catch (error) {
+        console.error(error);
+        setStatus("Failed to upload firmware.");
+    }
+});
+
+async function flashFirmware(firmwarePages: Uint8Array[], dev: HIDDevice, progressCb: (p: number) => void) {
+    progressCb(0);
+    await dev.open();
+
+    const PAGE_SIZE = 1024;
+    const REPORT_SIZE = PAGE_SIZE + 64;
+    const report = new Uint8Array(REPORT_SIZE);
+
+    try {
+        const neededBlocks = firmwarePages.filter(
+            (b, i) => i === 0 || !b.every(x => x === 0xFF)
+        ).length;
+
+        let processed = 0;
+        for (let i = 0; i < firmwarePages.length; i++) {
+            const block = firmwarePages[i];
+            if (i !== 0 && block.every(x => x === 0xFF)) continue;
+
+            report.fill(0);
+            const addr = i * PAGE_SIZE;
+            report[0] = addr & 0xFF;
+            report[1] = (addr >> 8) & 0xFF;
+            report[2] = (addr >> 16) & 0xFF;
+            report.set(block, 64);
+
+            const success = await sendReportWithRetries(dev, report, 5);
+            if (!success) {
+                throw new Error(`Block upload failed at block index=${i}`);
+            }
+
+            processed++;
+            progressCb(processed / neededBlocks);
+            await sleep(i === 0 ? 1500 : 5);
+        }
+
+        report.fill(0);
+        report[0] = 0xFF;
+        report[1] = 0xFF;
+        report[2] = 0xFF;
+        await sendReportWithRetries(dev, report, 5);
+        await sleep(100);
+
+    } finally {
+        await dev.close().catch(() => {});
+    }
+}
+
+async function sendReportWithRetries(dev: HIDDevice, data: Uint8Array, maxRetries = 5): Promise<boolean> {
+    for (let attempt = 0; attempt < maxRetries; attempt++) {
+        try {
+            await dev.sendReport(0, data);
+            return true;
+        } catch (err) {
+            console.warn(`sendReport attempt ${attempt+1} failed`, err);
+            await sleep(100);
+        }
+    }
+    return false;
+}
+
+// ====== Serial Port Logic =====
+function processSerialData(data: string) {
+    incompleteLine += data;
+    const lines = incompleteLine.split("\n");
+
+    for (let i = 0; i < lines.length - 1; i++) {
+        appendOutput(lines[i].trim());
+    }
+
+    incompleteLine = lines[lines.length - 1];
+}
+
+document.getElementById("open-serial")?.addEventListener("click", async () => {
+    try {
+        if (serialPort) {
+            setStatus("Serial port already open.");
+            return;
+        }
+
+        serialPort = await navigator.serial.requestPort();
+        await serialPort.open({ baudRate: 115200 });
+        setStatus("Serial port opened successfully.");
+        appendOutput("Serial port opened.");
+
+        const textDecoder = new TextDecoderStream();
+        serialPort.readable?.pipeTo(textDecoder.writable);
+        const reader = textDecoder.readable.getReader();
+
+        serialReader = reader;
+        while (true) {
+            const { value, done } = await reader.read();
+            if (done) break;
+            if (value) processSerialData(value);
+        }
+    } catch (error) {
+        console.error(error);
+        setStatus("Failed to open the serial port.");
+    }
+});
+
+document.getElementById("close-serial")?.addEventListener("click", async () => {
+    if (!serialPort) {
+        setStatus("No serial port is open.");
+        return;
+    }
+
+    try {
+        appendOutput("Closing serial port...");
+        if (serialReader) {
+            await serialReader.cancel();
+            serialReader = null;
+        }
+        await serialPort.close();
+        serialPort = null;
+        incompleteLine = "";
+        setStatus("Serial port closed successfully.");
+        appendOutput("Serial port closed.");
+    } catch (error) {
+        console.error(error);
+        setStatus("Failed to close the serial port.");
+    }
+});
+</script>
+          Select Device
+        </button>
+        <button id="upload" disabled class="px-4 py-2 bg-pink-500 text-black font-semibold rounded hover:bg-pink-400 transition disabled:opacity-50 disabled:cursor-not-allowed">
+          Upload Firmware
+        </button>
+      </div>
+
+      <progress id="progress" value="0" max="1" class="w-full h-6 mb-2 rounded overflow-hidden [&::-webkit-progress-bar]:bg-neutral-700 [&::-webkit-progress-value]:bg-pink-500 [&::-moz-progress-bar]:bg-pink-500"></progress>
+      
+      <p id="status" class="text-gray-400 italic">Select a firmware file to begin.</p>
+    </div>
+
+    <!-- Serial Monitor -->
+    <div id="serial" class="bg-neutral-800 rounded-lg p-6 mb-6">
+      <h2 class="text-xl font-semibold text-white mb-4">Serial Monitor</h2>
+      
+      <div class="flex gap-3 mb-4">
+        <button id="open-serial" class="px-4 py-2 bg-pink-500 text-black font-semibold rounded hover:bg-pink-400 transition">
+          Open Serial Port
+        </button>
+        <button id="close-serial" class="px-4 py-2 bg-neutral-600 text-white font-semibold rounded hover:bg-neutral-500 transition">
+          Close Serial Port
+        </button>
+      </div>
+
+      <textarea id="serial-output" readonly placeholder="Serial output will appear here..."
+                class="w-full h-48 p-3 rounded bg-black text-green-400 font-mono border border-neutral-600 resize-y"></textarea>
+    </div>
+
+    <!-- Troubleshooting -->
+    <div class="bg-neutral-800 rounded-lg p-6 mb-6">
+      <h2 class="text-xl font-semibold text-white mb-4">Troubleshooting</h2>
+      
+      <h3 class="text-lg font-medium text-white mt-4 mb-2">Device not appearing</h3>
+      <ul class="list-disc list-inside text-gray-300 space-y-1">
+        <li>Make sure you pressed the reset button on the Teensy (LED should be red)</li>
+        <li>Try a different USB cable or port</li>
+        <li>Ensure no other application is using the Teensy</li>
+      </ul>
+
+      <h3 class="text-lg font-medium text-white mt-4 mb-2">Upload fails</h3>
+      <ul class="list-disc list-inside text-gray-300 space-y-1">
+        <li>Check that you selected the correct firmware for your hardware</li>
+        <li>Verify the Teensy is in bootloader mode (red LED)</li>
+        <li>Try pressing reset again and re-selecting the device</li>
+      </ul>
+
+      <h3 class="text-lg font-medium text-white mt-4 mb-2">CORS errors with latest builds</h3>
+      <p class="text-gray-300">
+        If the online firmware list doesn't load, download firmware directly from 
+        <a href="https://github.com/coelacant1/ProtoTracer/releases" target="_blank" class="text-pink-400 hover:text-pink-300">GitHub Releases</a> 
+        and use the "Local File Upload" option.
+      </p>
+    </div>
+
+    <div class="bg-neutral-800 rounded-lg p-6">
+      <h2 class="text-xl font-semibold text-white mb-4">Alternative: Manual Upload</h2>
+      <p class="text-gray-300">
+        If the web uploader doesn't work for you, use 
+        <a href="https://www.pjrc.com/teensy/loader.html" target="_blank" class="text-pink-400 hover:text-pink-300">Teensy Loader</a> 
+        from PJRC.
+      </p>
+    </div>
+  </main>
+</BaseLayout>
+
+<script>
+/************************************************************
+ *  ProtoTracer Firmware Uploader
+ *  - GitHub firmware fetch
+ *  - Local file load
+ *  - Intel HEX parsing -> 1KB blocks
+ *  - WebHID upload to Teensy bootloader
+ *  - Serial open/close
+ ************************************************************/
+
+// ===== DOM Elements / Globals =====
+const statusElement = document.getElementById("status");
+const progressElement = document.getElementById("progress") as HTMLProgressElement;
+const outputBox = document.getElementById("serial-output") as HTMLTextAreaElement;
+const firmwareSelect = document.getElementById("firmware-select") as HTMLSelectElement;
+const radioButtons = document.querySelectorAll('input[name="firmware-source"]');
+const latestBuildsDiv = document.getElementById("latest-builds");
+const localFileDiv = document.getElementById("local-file");
+const firmwareInput = document.getElementById("firmware") as HTMLInputElement;
+const releaseLinkDiv = document.getElementById("release-link");
+
+let firmwareFile: Uint8Array | null = null;
+let firmwareFileName: string | null = null;
+let device: HIDDevice | null = null;
+let serialPort: SerialPort | null = null;
+let serialReader: ReadableStreamDefaultReader<string> | null = null;
+const outputBuffer: string[] = [];
+let incompleteLine = "";
+
+// GitHub API URL for ProtoTracer releases
+const githubReleasesUrl = "https://api.github.com/repos/coelacant1/ProtoTracer/releases/latest";
+let latestReleaseUrl = "https://github.com/coelacant1/ProtoTracer/releases/latest";
+
+// ===== Utility Functions =====
+function setStatus(message: string) {
+    if (statusElement) statusElement.textContent = message;
+}
+
+function appendOutput(message: string) {
+    outputBuffer.push(message);
+    if (outputBuffer.length > 20) {
+        outputBuffer.shift();
+    }
+    if (outputBox) {
+        outputBox.value = outputBuffer.join("\n");
+        outputBox.scrollTop = outputBox.scrollHeight;
+    }
+}
+
+function sleep(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function showReleaseLink(show: boolean) {
+    if (releaseLinkDiv) {
+        releaseLinkDiv.classList.toggle('hidden', !show);
+    }
+}
+
+function updateReleaseLink(url: string, tagName: string) {
+    const link = document.getElementById("release-url") as HTMLAnchorElement;
+    if (link) {
+        link.href = url;
+        link.textContent = `Download from GitHub Releases (${tagName || 'latest'})`;
+    }
+}
+
+// ===== GitHub Firmware Fetch =====
+async function fetchFirmwareFiles() {
+    try {
+        const response = await fetch(githubReleasesUrl);
+        if (!response.ok) {
+            throw new Error(`GitHub API error: ${response.status}`);
+        }
+
+        const releaseData = await response.json();
+        latestReleaseUrl = releaseData.html_url || latestReleaseUrl;
+        const tagName = releaseData.tag_name || "latest";
+        updateReleaseLink(latestReleaseUrl, tagName);
+        
+        const assets = releaseData.assets || [];
+        const hexFiles = assets.filter((asset: any) => asset.name.endsWith(".hex"));
+
+        if (hexFiles.length === 0) {
+            setStatus("No firmware files found. Use local file upload or download from GitHub.");
+            showReleaseLink(true);
+            return;
+        }
+
+        if (firmwareSelect) {
+            firmwareSelect.innerHTML = '<option value="">Select firmware...</option>';
+            hexFiles.forEach((file: any) => {
+                const option = document.createElement("option");
+                option.value = file.browser_download_url;
+                option.textContent = file.name;
+                firmwareSelect.appendChild(option);
+            });
+        }
+
+        setStatus("Firmware files loaded. Select one or download from GitHub Releases.");
+    } catch (error) {
+        console.error(error);
+        setStatus("Could not fetch firmware list. Use local file upload instead.");
+        showReleaseLink(true);
+    }
+}
+
+// Initialize on load
+fetchFirmwareFiles();
+
+// Toggle firmware source
+radioButtons.forEach(radio => {
+    radio.addEventListener("change", (event) => {
+        const target = event.target as HTMLInputElement;
+        if (target.value === "latest-builds") {
+            latestBuildsDiv?.classList.remove('hidden');
+            localFileDiv?.classList.add('hidden');
+            firmwareFile = null;
+        } else if (target.value === "local-file") {
+            latestBuildsDiv?.classList.add('hidden');
+            localFileDiv?.classList.remove('hidden');
+            firmwareFile = null;
+        }
+        setStatus("Select a firmware file.");
+        const uploadBtn = document.getElementById("upload") as HTMLButtonElement;
+        if (uploadBtn) uploadBtn.disabled = true;
+    });
+});
+
+// Handle local file upload
+firmwareInput?.addEventListener("change", (event) => {
+    const target = event.target as HTMLInputElement;
+    const file = target.files?.[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = () => {
+            firmwareFile = new Uint8Array(reader.result as ArrayBuffer);
+            firmwareFileName = file.name.toLowerCase();
+            setStatus(`Firmware loaded: ${firmwareFileName}`);
+            const uploadBtn = document.getElementById("upload") as HTMLButtonElement;
+            if (uploadBtn) uploadBtn.disabled = false;
+        };
+        reader.onerror = () => {
+            setStatus("Error reading the firmware file.");
+        };
+        reader.readAsArrayBuffer(file);
+    } else {
+        firmwareFile = null;
+        firmwareFileName = null;
+        setStatus("No firmware file selected.");
+    }
+});
+
+// Handle firmware selection from dropdown
+firmwareSelect?.addEventListener("change", async (event) => {
+    const target = event.target as HTMLSelectElement;
+    const url = target.value;
+
+    if (!url) {
+        setStatus("No firmware file selected.");
+        firmwareFile = null;
+        firmwareFileName = null;
+        return;
+    }
+
+    try {
+        setStatus("Downloading firmware...");
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Download error: ${response.status}`);
+        }
+
+        const arrayBuffer = await response.arrayBuffer();
+        firmwareFile = new Uint8Array(arrayBuffer);
+        firmwareFileName = url.split("/").pop()?.toLowerCase() || null;
+        setStatus(`Firmware loaded: ${firmwareFileName}`);
+        const uploadBtn = document.getElementById("upload") as HTMLButtonElement;
+        if (uploadBtn) uploadBtn.disabled = false;
+        showReleaseLink(false);
+    } catch (error) {
+        console.error(error);
+        setStatus("CORS error: Download the .hex file from GitHub and use Local File Upload.");
+        showReleaseLink(true);
+        firmwareFile = null;
+        firmwareFileName = null;
+    }
+});
+
+// Select Teensy device
+document.getElementById("select-device")?.addEventListener("click", async () => {
+    try {
+        const devices = await navigator.hid.requestDevice({
+            filters: [
+                { vendorId: 0x16C0, productId: 0x0478 }, // Teensy 4.0
+                { vendorId: 0x16C0, productId: 0x0479 }  // Teensy 4.1
+            ]
+        });
+
+        if (devices.length > 0) {
+            device = devices[0];
+            const deviceName = device.productName ||
+                (device.productId === 0x0478 ? "Teensy 4.0" :
+                 device.productId === 0x0479 ? "Teensy 4.1" : "Unknown");
+            setStatus(`Device selected: ${deviceName}`);
+        } else {
+            setStatus("No device selected.");
+        }
+    } catch (error) {
+        console.error(error);
+        setStatus("Failed to select device.");
+    }
+});
+
+// ===== Intel HEX Parsing Logic =====
+async function parseHexToBlocks(hexData: Uint8Array, blockSize: number, offset: number): Promise<Uint8Array[]> {
+    const text = new TextDecoder().decode(hexData);
+    const lines = text.split(/\r?\n/);
+    const blocks: (Uint8Array | undefined)[] = [];
+    let baseAddress = 0;
+
+    function ensureBlock(idx: number) {
+        if (!blocks[idx]) {
+            const block = new Uint8Array(blockSize);
+            block.fill(0xff);
+            blocks[idx] = block;
+        }
+    }
+
+    for (let lineNum = 0; lineNum < lines.length; lineNum++) {
+        let line = lines[lineNum].trim();
+        if (!line) continue;
+        if (!line.startsWith(':')) {
+            throw new Error(`Invalid HEX: missing ':' on line ${lineNum+1}`);
+        }
+
+        line = line.slice(1);
+        const length = parseInt(line.slice(0, 2), 16);
+        const address = parseInt(line.slice(2, 6), 16);
+        const recordType = parseInt(line.slice(6, 8), 16);
+        let cursor = 8;
+        let calcSum = length + ((address >> 8) & 0xFF) + (address & 0xFF) + recordType;
+
+        if (line.length !== (10 + length*2)) {
+            throw new Error(`Line length mismatch on line ${lineNum+1}`);
+        }
+
+        switch (recordType) {
+            case 0x00: {
+                const dataBytes = new Uint8Array(length);
+                for (let i = 0; i < length; i++) {
+                    const byteVal = parseInt(line.slice(cursor, cursor+2), 16);
+                    cursor += 2;
+                    dataBytes[i] = byteVal;
+                    calcSum += byteVal;
+                }
+
+                const checkSum = parseInt(line.slice(cursor, cursor+2), 16);
+                calcSum = (calcSum & 0xFF);
+                const total = (calcSum + checkSum) & 0xFF;
+                if (total !== 0) {
+                    throw new Error(`Checksum error on line ${lineNum+1}`);
+                }
+
+                let addr32 = baseAddress + address;
+                addr32 -= offset;
+
+                if (addr32 < 0) continue;
+
+                let dataIndex = 0;
+                while (dataIndex < dataBytes.length) {
+                    const blockIndex = Math.floor(addr32 / blockSize);
+                    ensureBlock(blockIndex);
+
+                    const blockStartAddr = blockIndex * blockSize;
+                    const withinBlockOffset = addr32 - blockStartAddr;
+                    const spaceInBlock = blockSize - withinBlockOffset;
+                    const toCopy = Math.min(spaceInBlock, dataBytes.length - dataIndex);
+
+                    blocks[blockIndex]!.set(
+                        dataBytes.subarray(dataIndex, dataIndex + toCopy),
+                        withinBlockOffset
+                    );
+
+                    dataIndex += toCopy;
+                    addr32 += toCopy;
+                }
+                break;
+            }
+            case 0x01: {
+                for (let i = 0; i < length; i++) {
+                    const byteVal = parseInt(line.slice(cursor, cursor+2), 16);
+                    cursor += 2;
+                    calcSum += byteVal;
+                }
+                const checkSum = parseInt(line.slice(cursor, cursor+2), 16);
+                calcSum = (calcSum & 0xFF);
+                const total = (calcSum + checkSum) & 0xFF;
+                if (total !== 0) {
+                    throw new Error(`Checksum error on EOF line ${lineNum+1}`);
+                }
+                break;
+            }
+            case 0x02: {
+                const highAddr = parseInt(line.slice(cursor, cursor+4), 16);
+                calcSum += ((highAddr >> 8) & 0xFF) + (highAddr & 0xFF);
+                cursor += 4;
+                const checkSum = parseInt(line.slice(cursor, cursor+2), 16);
+                calcSum = (calcSum & 0xFF);
+                if (((calcSum + checkSum) & 0xFF) !== 0) {
+                    throw new Error(`Checksum error on line ${lineNum+1}`);
+                }
+                baseAddress = highAddr << 4;
+                break;
+            }
+            case 0x04: {
+                const upper16 = parseInt(line.slice(cursor, cursor+4), 16);
+                calcSum += ((upper16 >> 8) & 0xFF) + (upper16 & 0xFF);
+                cursor += 4;
+                const checkSum = parseInt(line.slice(cursor, cursor+2), 16);
+                calcSum = (calcSum & 0xFF);
+                if (((calcSum + checkSum) & 0xFF) !== 0) {
+                    throw new Error(`Checksum error on line ${lineNum+1}`);
+                }
+                baseAddress = upper16 << 16;
+                break;
+            }
+            default: {
+                for (let i = 0; i < length; i++) {
+                    const byteVal = parseInt(line.slice(cursor, cursor+2), 16);
+                    cursor += 2;
+                    calcSum += byteVal;
+                }
+                const checkSum = parseInt(line.slice(cursor, cursor+2), 16);
+                calcSum = (calcSum & 0xFF);
+                if (((calcSum + checkSum) & 0xFF) !== 0) {
+                    throw new Error(`Checksum error on line ${lineNum+1}`);
+                }
+                break;
+            }
+        }
+    }
+
+    return blocks.filter((b): b is Uint8Array => b !== undefined);
+}
+
+async function buildFirmwareBlocks(fw: Uint8Array, fwName: string): Promise<Uint8Array[]> {
+    if (fwName.endsWith('.hex')) {
+        setStatus("Parsing Intel HEX...");
+        return await parseHexToBlocks(fw, 1024, 0x60000000);
+    } else {
+        setStatus("Treating file as raw 1KB pages");
+        const pages: Uint8Array[] = [];
+        for (let i = 0; i < fw.length; i += 1024) {
+            const chunk = fw.slice(i, i + 1024);
+            if (chunk.length < 1024) {
+                const padded = new Uint8Array(1024);
+                padded.fill(0xFF);
+                padded.set(chunk, 0);
+                pages.push(padded);
+            } else {
+                pages.push(chunk);
+            }
+        }
+        return pages;
+    }
+}
+
+// Upload firmware
+document.getElementById("upload")?.addEventListener("click", async () => {
+    if (!firmwareFile || !device || !firmwareFileName) {
+        setStatus("Please load a firmware file and select a device first.");
+        return;
+    }
+
+    const isTeensy40 = (device.productId === 0x0478) && firmwareFileName.includes("teensy40");
+    const isTeensy41 = (device.productId === 0x0479) && firmwareFileName.includes("teensy41");
+
+    if (!isTeensy40 && !isTeensy41) {
+        setStatus("Firmware file does not match the selected device. Upload canceled.");
+        return;
+    }
+
+    setStatus("Building firmware blocks...");
+    if (progressElement) progressElement.value = 0;
+
+    let blocks: Uint8Array[] = [];
+    try {
+        blocks = await buildFirmwareBlocks(firmwareFile, firmwareFileName);
+    } catch (err) {
+        console.error(err);
+        setStatus(`Failed to parse firmware file: ${err}`);
+        return;
+    }
+
+    setStatus("Uploading firmware...");
+    try {
+        await flashFirmware(blocks, device, progress => {
+            if (progressElement) progressElement.value = progress;
+        });
+        setStatus("Firmware uploaded successfully!");
+    } catch (error) {
+        console.error(error);
+        setStatus("Failed to upload firmware.");
+    }
+});
+
+async function flashFirmware(firmwarePages: Uint8Array[], dev: HIDDevice, progressCb: (p: number) => void) {
+    progressCb(0);
+    await dev.open();
+
+    const PAGE_SIZE = 1024;
+    const REPORT_SIZE = PAGE_SIZE + 64;
+    const report = new Uint8Array(REPORT_SIZE);
+
+    try {
+        const neededBlocks = firmwarePages.filter(
+            (b, i) => i === 0 || !b.every(x => x === 0xFF)
+        ).length;
+
+        let processed = 0;
+        for (let i = 0; i < firmwarePages.length; i++) {
+            const block = firmwarePages[i];
+            if (i !== 0 && block.every(x => x === 0xFF)) continue;
+
+            report.fill(0);
+            const addr = i * PAGE_SIZE;
+            report[0] = addr & 0xFF;
+            report[1] = (addr >> 8) & 0xFF;
+            report[2] = (addr >> 16) & 0xFF;
+            report.set(block, 64);
+
+            const success = await sendReportWithRetries(dev, report, 5);
+            if (!success) {
+                throw new Error(`Block upload failed at block index=${i}`);
+            }
+
+            processed++;
+            progressCb(processed / neededBlocks);
+            await sleep(i === 0 ? 1500 : 5);
+        }
+
+        report.fill(0);
+        report[0] = 0xFF;
+        report[1] = 0xFF;
+        report[2] = 0xFF;
+        await sendReportWithRetries(dev, report, 5);
+        await sleep(100);
+
+    } finally {
+        await dev.close().catch(() => {});
+    }
+}
+
+async function sendReportWithRetries(dev: HIDDevice, data: Uint8Array, maxRetries = 5): Promise<boolean> {
+    for (let attempt = 0; attempt < maxRetries; attempt++) {
+        try {
+            await dev.sendReport(0, data);
+            return true;
+        } catch (err) {
+            console.warn(`sendReport attempt ${attempt+1} failed`, err);
+            await sleep(100);
+        }
+    }
+    return false;
+}
+
+// ====== Serial Port Logic =====
+function processSerialData(data: string) {
+    incompleteLine += data;
+    const lines = incompleteLine.split("\n");
+
+    for (let i = 0; i < lines.length - 1; i++) {
+        appendOutput(lines[i].trim());
+    }
+
+    incompleteLine = lines[lines.length - 1];
+}
+
+document.getElementById("open-serial")?.addEventListener("click", async () => {
+    try {
+        if (serialPort) {
+            setStatus("Serial port already open.");
+            return;
+        }
+
+        serialPort = await navigator.serial.requestPort();
+        await serialPort.open({ baudRate: 115200 });
+        setStatus("Serial port opened successfully.");
+        appendOutput("Serial port opened.");
+
+        const textDecoder = new TextDecoderStream();
+        serialPort.readable?.pipeTo(textDecoder.writable);
+        const reader = textDecoder.readable.getReader();
+
+        serialReader = reader;
+        while (true) {
+            const { value, done } = await reader.read();
+            if (done) break;
+            if (value) processSerialData(value);
+        }
+    } catch (error) {
+        console.error(error);
+        setStatus("Failed to open the serial port.");
+    }
+});
+
+document.getElementById("close-serial")?.addEventListener("click", async () => {
+    if (!serialPort) {
+        setStatus("No serial port is open.");
+        return;
+    }
+
+    try {
+        appendOutput("Closing serial port...");
+        if (serialReader) {
+            await serialReader.cancel();
+            serialReader = null;
+        }
+        await serialPort.close();
+        serialPort = null;
+        incompleteLine = "";
+        setStatus("Serial port closed successfully.");
+        appendOutput("Serial port closed.");
+    } catch (error) {
+        console.error(error);
+        setStatus("Failed to close the serial port.");
+    }
+});
+</script>

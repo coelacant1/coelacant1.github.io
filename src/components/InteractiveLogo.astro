@@ -1,0 +1,462 @@
+---
+// Interactive logo - Fluffy pink dragon!
+// Base image is 512x512, regions defined by pixel coordinates
+// This uses CSS transforms which move the whole image but can simulate some effects
+---
+
+<div class="interactive-logo-wrapper">
+  <div class="logo-shadow" id="logo-shadow"></div>
+  <div class="interactive-logo" id="interactive-logo">
+    <img 
+      src="/images/logo/base.png" 
+      alt="Coela Can't! Logo" 
+      class="logo-image"
+      id="logo-image"
+    />
+    <!-- Hidden canvas for hover detection -->
+    <canvas id="hover-canvas" width="512" height="512" style="display: none;"></canvas>
+    <!-- Invisible hover regions for image swaps -->
+    <div class="hover-region" data-image="/images/logo/pat.png" data-intensity="1.5" style="left: 27px; top: 45px; width: 183px; height: 177px;"></div>
+    <div class="hover-region" data-image="/images/logo/tummy.png" data-intensity="1.2" style="left: 130px; top: 230px; width: 165px; height: 113px;"></div>
+    <div class="hover-region" data-image="/images/logo/beans.png" data-intensity="1.3" style="left: 343px; top: 146px; width: 152px; height: 47px;"></div>
+    <div class="hover-region" data-image="/images/logo/tail.png" data-intensity="1.4" style="left: 360px; top: 1px; width: 96px; height: 120px;"></div>
+  </div>
+</div>
+
+<style>
+  .interactive-logo-wrapper {
+    position: relative;
+    width: 512px;
+    height: 512px;
+  }
+  
+  .logo-shadow {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 30px;
+    background: radial-gradient(ellipse, rgba(0,0,0,0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: shadow-pulse 5s ease-in-out infinite;
+    transition: all 1s ease-out;
+  }
+  
+  @keyframes shadow-pulse {
+    0%, 100% {
+      transform: translateX(-50%) scale(1);
+      opacity: 0.6;
+    }
+    15% {
+      transform: translateX(-50%) scale(0.95);
+      opacity: 0.7;
+    }
+    50% {
+      transform: translateX(-50%) scale(0.85);
+      opacity: 0.8;
+    }
+    85% {
+      transform: translateX(-50%) scale(0.92);
+      opacity: 0.7;
+    }
+  }
+  
+  .interactive-logo {
+    position: relative;
+    width: 512px;
+    height: 512px;
+    cursor: auto;
+    animation: float 5s ease-in-out infinite;
+  }
+  
+  .interactive-logo.hand-cursor {
+    cursor: url('/images/logo/hand.PNG'), pointer;
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    10% {
+      transform: translateY(-6px) rotate(0.6deg);
+    }
+    25% {
+      transform: translateY(-10px) rotate(-0.4deg);
+    }
+    40% {
+      transform: translateY(-5px) rotate(0.3deg);
+    }
+    55% {
+      transform: translateY(-12px) rotate(-0.2deg);
+    }
+    70% {
+      transform: translateY(-7px) rotate(0.5deg);
+    }
+    85% {
+      transform: translateY(-9px) rotate(-0.3deg);
+    }
+  }
+  
+  .logo-image {
+    width: 512px;
+    height: 512px;
+    object-fit: contain;
+    display: block;
+    transition: 
+      transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      filter 1.2s ease-out;
+    animation: breathe 3.5s ease-in-out infinite, wiggle 6s ease-in-out infinite, fluff 4s ease-in-out infinite;
+    filter: brightness(1) drop-shadow(0 4px 8px rgba(248, 160, 194, 0));
+    transform-origin: center center;
+  }
+  
+  @keyframes breathe {
+    0%, 100% {
+      filter: brightness(1) drop-shadow(0 4px 8px rgba(248, 160, 194, 0));
+    }
+    50% {
+      filter: brightness(1.02) drop-shadow(0 4px 10px rgba(248, 160, 194, 0.05));
+    }
+  }
+  
+  @keyframes wiggle {
+    0%, 100% {
+      transform: scale(1) rotate(0deg) skewX(0deg);
+    }
+    12% {
+      transform: scale(1.012) rotate(0.5deg) skewX(0.3deg);
+    }
+    28% {
+      transform: scale(0.994) rotate(-0.4deg) skewX(-0.2deg);
+    }
+    44% {
+      transform: scale(1.008) rotate(0.3deg) skewX(0.2deg);
+    }
+    62% {
+      transform: scale(0.996) rotate(-0.5deg) skewX(-0.3deg);
+    }
+    78% {
+      transform: scale(1.01) rotate(0.4deg) skewX(0.15deg);
+    }
+    90% {
+      transform: scale(0.998) rotate(-0.2deg) skewX(-0.1deg);
+    }
+  }
+  
+  @keyframes fluff {
+    0%, 100% {
+      transform: scaleY(1) scaleX(1);
+    }
+    25% {
+      transform: scaleY(1.008) scaleX(0.996);
+    }
+    50% {
+      transform: scaleY(0.996) scaleX(1.006);
+    }
+    75% {
+      transform: scaleY(1.004) scaleX(0.998);
+    }
+  }
+  
+  .interactive-logo.hovering .logo-image {
+    animation: none;
+  }
+  
+  .logo-image.distort {
+    animation: none;
+  }
+  
+  .hover-region {
+    position: absolute;
+  }
+  
+  @media (max-width: 540px) {
+    .interactive-logo-wrapper {
+      width: 100%;
+      max-width: 512px;
+      height: auto;
+      aspect-ratio: 1;
+    }
+    
+    .interactive-logo {
+      width: 100%;
+      height: 100%;
+    }
+    
+    .logo-image {
+      width: 100%;
+      height: auto;
+    }
+    
+    .hover-region {
+      transform-origin: top left;
+    }
+  }
+</style>
+
+<script>
+  const logo = document.getElementById('interactive-logo') as HTMLElement;
+  const logoImage = document.getElementById('logo-image') as HTMLImageElement;
+  const logoShadow = document.getElementById('logo-shadow') as HTMLElement;
+  const hoverCanvas = document.getElementById('hover-canvas') as HTMLCanvasElement;
+  const hoverCtx = hoverCanvas?.getContext('2d');
+  const regions = document.querySelectorAll('.hover-region');
+  const baseImage = '/images/logo/base.png';
+  const blinkImage = '/images/logo/blink.png';
+  
+  let isHovering = false;
+  let isSettling = false;
+  let currentRegion: HTMLElement | null = null;
+  let blinkTimeout: number | null = null;
+  let mouseX = 256;
+  let mouseY = 256;
+  let currentTransformX = 0;
+  let currentTransformY = 0;
+  let currentRotate = 0;
+  let currentSkewX = 0;
+  let currentSkewY = 0;
+  let currentScale = 1;
+  let glowLevel = 0;
+  let animationFrame: number | null = null;
+  let hoverAreaData: ImageData | null = null;
+  
+  // Load hover area image into canvas for pixel detection
+  const hoverAreaImg = new Image();
+  hoverAreaImg.crossOrigin = 'anonymous';
+  hoverAreaImg.onload = () => {
+    if (hoverCtx) {
+      hoverCtx.drawImage(hoverAreaImg, 0, 0, 512, 512);
+      hoverAreaData = hoverCtx.getImageData(0, 0, 512, 512);
+    }
+  };
+  hoverAreaImg.src = '/images/logo/hoverarea.png';
+  
+  // Check if pixel at position is black (not transparent)
+  function isHoverPixel(x: number, y: number): boolean {
+    if (!hoverAreaData) return false;
+    
+    const px = Math.floor(x);
+    const py = Math.floor(y);
+    
+    if (px < 0 || px >= 512 || py < 0 || py >= 512) return false;
+    
+    const index = (py * 512 + px) * 4;
+    const r = hoverAreaData.data[index];
+    const g = hoverAreaData.data[index + 1];
+    const b = hoverAreaData.data[index + 2];
+    const a = hoverAreaData.data[index + 3];
+    
+    // Check if pixel is black (or dark) and not transparent
+    return a > 128 && r < 128 && g < 128 && b < 128;
+  }
+  
+  // Quick blink helper
+  function doBlink(duration: number = 70) {
+    return new Promise<void>((resolve) => {
+      if (!isHovering && !isSettling && logoImage) {
+        logoImage.src = blinkImage;
+        setTimeout(() => {
+          if (!isHovering && !isSettling && logoImage) {
+            logoImage.src = baseImage;
+          }
+          resolve();
+        }, duration);
+      } else {
+        resolve();
+      }
+    });
+  }
+  
+  // Random blink function
+  async function scheduleBlink() {
+    if (blinkTimeout) clearTimeout(blinkTimeout);
+    
+    const delay = 1500 + Math.random() * 2500;
+    
+    blinkTimeout = window.setTimeout(async () => {
+      if (!isHovering && !isSettling && logoImage) {
+        await doBlink(60);
+        
+        if (Math.random() < 0.4) {
+          await new Promise(r => setTimeout(r, 80));
+          await doBlink(50);
+          
+          if (Math.random() < 0.2) {
+            await new Promise(r => setTimeout(r, 60));
+            await doBlink(40);
+          }
+        }
+      }
+      scheduleBlink();
+    }, delay);
+  }
+  
+  // Mouse tracking animation loop
+  function animate() {
+    const isActive = isHovering || isSettling;
+    
+    if (isHovering && logoImage) {
+      // Get intensity multiplier from current region
+      let intensity = currentRegion ? parseFloat(currentRegion.dataset.intensity || '1') : 0.6;
+      
+      // Calculate offset from center (normalized -1 to 1)
+      const centerX = 256;
+      const centerY = 256;
+      const offsetX = (mouseX - centerX) / centerX;
+      const offsetY = (mouseY - centerY) / centerY;
+      
+      // Target values based on mouse position
+      const targetX = offsetX * 15 * intensity;
+      const targetY = offsetY * 10 * intensity;
+      const targetRotate = offsetX * 8 * intensity;
+      const targetSkewX = offsetX * 3 * intensity;
+      const targetSkewY = offsetY * 2 * intensity;
+      const targetScale = 1 + (Math.abs(offsetX) + Math.abs(offsetY)) * 0.02 * intensity;
+      
+      // Smooth interpolation (lerp)
+      const lerp = 0.12;
+      currentTransformX += (targetX - currentTransformX) * lerp;
+      currentTransformY += (targetY - currentTransformY) * lerp;
+      currentRotate += (targetRotate - currentRotate) * lerp;
+      currentSkewX += (targetSkewX - currentSkewX) * lerp;
+      currentSkewY += (targetSkewY - currentSkewY) * lerp;
+      currentScale += (targetScale - currentScale) * lerp;
+      
+      // Gradual glow increase
+      if (glowLevel < 1) {
+        glowLevel += 0.008;
+      }
+    } else if (isSettling && logoImage) {
+      // Return to rest position smoothly
+      const lerp = 0.08;
+      currentTransformX += (0 - currentTransformX) * lerp;
+      currentTransformY += (0 - currentTransformY) * lerp;
+      currentRotate += (0 - currentRotate) * lerp;
+      currentSkewX += (0 - currentSkewX) * lerp;
+      currentSkewY += (0 - currentSkewY) * lerp;
+      currentScale += (1 - currentScale) * lerp;
+      
+      // Gradual glow decrease
+      glowLevel += (0 - glowLevel) * lerp;
+      
+      // Check if settled
+      const threshold = 0.05;
+      if (
+        Math.abs(currentTransformX) < threshold &&
+        Math.abs(currentTransformY) < threshold &&
+        Math.abs(currentRotate) < threshold &&
+        Math.abs(currentSkewX) < threshold &&
+        Math.abs(currentSkewY) < threshold &&
+        Math.abs(currentScale - 1) < 0.001 &&
+        glowLevel < 0.01
+      ) {
+        isSettling = false;
+        logoImage.style.transform = '';
+        logoImage.style.filter = '';
+        logo.classList.remove('hovering');
+        if (logoShadow) {
+          logoShadow.style.transform = '';
+        }
+      }
+    }
+    
+    // Apply transforms while active
+    if (isActive && logoImage) {
+      logoImage.style.transform = `
+        translate(${currentTransformX}px, ${currentTransformY}px)
+        rotate(${currentRotate}deg)
+        skew(${currentSkewX}deg, ${currentSkewY}deg)
+        scale(${currentScale})
+      `;
+      
+      const brightness = 1 + glowLevel * 0.06;
+      const glowSize = 12 + glowLevel * 20;
+      const glowOpacity = glowLevel * 0.4;
+      logoImage.style.filter = `brightness(${brightness}) drop-shadow(0 ${4 + glowLevel * 6}px ${glowSize}px rgba(248, 160, 194, ${glowOpacity}))`;
+      
+      // Update shadow based on position
+      if (logoShadow) {
+        const shadowOffsetX = -currentTransformX * 0.3;
+        const shadowScale = 1 - Math.abs(currentTransformY) * 0.01;
+        logoShadow.style.transform = `translateX(calc(-50% + ${shadowOffsetX}px)) scale(${shadowScale})`;
+      }
+    }
+    
+    animationFrame = requestAnimationFrame(animate);
+  }
+  
+  // Start animation loop
+  animate();
+  scheduleBlink();
+  
+  // Handle responsive scaling of hover regions
+  function updateRegionScales() {
+    const container = logo;
+    if (!container) return;
+    
+    const scale = container.offsetWidth / 512;
+    
+    regions.forEach((region) => {
+      const el = region as HTMLElement;
+      el.style.transform = `scale(${scale})`;
+      el.style.transformOrigin = 'top left';
+    });
+  }
+  
+  // Mouse move tracking
+  logo?.addEventListener('mousemove', (e) => {
+    const rect = logo.getBoundingClientRect();
+    const scale = rect.width / 512;
+    mouseX = (e.clientX - rect.left) / scale;
+    mouseY = (e.clientY - rect.top) / scale;
+    
+    // Update cursor based on hoverarea.png pixel
+    if (isHoverPixel(mouseX, mouseY)) {
+      logo.classList.add('hand-cursor');
+    } else {
+      logo.classList.remove('hand-cursor');
+    }
+  });
+  
+  // Set up hover events for regions
+  regions.forEach((region) => {
+    region.addEventListener('mouseenter', () => {
+      currentRegion = region as HTMLElement;
+      const newImage = currentRegion.dataset.image;
+      if (newImage && logoImage) {
+        logoImage.src = newImage;
+        logoImage.classList.add('distort');
+      }
+    });
+    
+    region.addEventListener('mouseleave', () => {
+      currentRegion = null;
+      if (logoImage && isHovering) {
+        logoImage.src = baseImage;
+        logoImage.classList.remove('distort');
+      }
+    });
+  });
+  
+  // Logo enter/leave
+  logo?.addEventListener('mouseenter', () => {
+    isHovering = true;
+    isSettling = false;
+    logo.classList.add('hovering');
+  });
+  
+  logo?.addEventListener('mouseleave', () => {
+    isHovering = false;
+    isSettling = true;
+    currentRegion = null;
+    if (logoImage) {
+      logoImage.src = baseImage;
+      logoImage.classList.remove('distort');
+    }
+  });
+  
+  // Initial scale update and resize listener
+  updateRegionScales();
+  window.addEventListener('resize', updateRegionScales);
+</script>

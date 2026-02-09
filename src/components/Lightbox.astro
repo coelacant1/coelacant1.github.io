@@ -1,0 +1,157 @@
+---
+// Lightbox component for expanding images
+---
+
+<div id="lightbox" class="lightbox hidden">
+  <button id="lightbox-close" class="lightbox-close" aria-label="Close">
+    <svg viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8">
+      <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+    </svg>
+  </button>
+  <div class="lightbox-content">
+    <img id="lightbox-img" src="" alt="" />
+    <div id="lightbox-caption" class="lightbox-caption"></div>
+  </div>
+</div>
+
+<style>
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+  
+  .lightbox.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .lightbox-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 101;
+    color: #f5f5f5;
+    background: rgba(248, 160, 194, 0.2);
+    border: 1px solid rgba(248, 160, 194, 0.4);
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .lightbox-close:hover {
+    background: rgba(248, 160, 194, 0.4);
+    color: #f8a0c2;
+    transform: scale(1.1);
+  }
+  
+  .lightbox-content {
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: lightbox-zoom 0.3s ease;
+  }
+  
+  @keyframes lightbox-zoom {
+    from {
+      transform: scale(0.9);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  .lightbox-content img {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 0.5rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  }
+  
+  .lightbox-caption {
+    margin-top: 1rem;
+    color: #f5f5f5;
+    text-align: center;
+    font-size: 1.1rem;
+  }
+  
+  .lightbox-caption .title {
+    color: #f8a0c2;
+    font-weight: 600;
+    font-size: 1.25rem;
+  }
+  
+  .lightbox-caption .description {
+    color: rgba(245, 245, 245, 0.7);
+    margin-top: 0.25rem;
+  }
+</style>
+
+<script>
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const lightboxClose = document.getElementById('lightbox-close');
+  
+  // Open lightbox when clicking gallery images
+  document.querySelectorAll('[data-lightbox]').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      const img = el as HTMLElement;
+      const src = img.dataset.lightbox || img.getAttribute('src') || '';
+      const title = img.dataset.title || '';
+      const description = img.dataset.description || '';
+      
+      if (lightboxImg && lightboxCaption && lightbox) {
+        lightboxImg.src = src;
+        lightboxImg.alt = title;
+        lightboxCaption.innerHTML = `
+          ${title ? `<div class="title">${title}</div>` : ''}
+          ${description ? `<div class="description">${description}</div>` : ''}
+        `;
+        lightbox.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        // Hide shader toggle when lightbox is open
+        const shaderToggle = document.getElementById('shader-toggle');
+        if (shaderToggle) shaderToggle.style.display = 'none';
+      }
+    });
+  });
+  
+  // Close lightbox
+  function closeLightbox() {
+    if (lightbox) {
+      lightbox.classList.add('hidden');
+      document.body.style.overflow = '';
+      // Show shader toggle when lightbox closes
+      const shaderToggle = document.getElementById('shader-toggle');
+      if (shaderToggle) shaderToggle.style.display = '';
+    }
+  }
+  
+  lightboxClose?.addEventListener('click', closeLightbox);
+  lightbox?.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  
+  // Close on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+</script>

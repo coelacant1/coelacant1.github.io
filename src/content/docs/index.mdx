@@ -1,0 +1,34 @@
+---
+title: Documentation Home
+description: Welcome to the Coela Can't! Documentation
+template: splash
+hero:
+  tagline: Guides, resources, and documentation for Protogens and more!
+  actions:
+    - text: Get Started
+      link: /welcome/
+      icon: right-arrow
+    - text: Back to Main Site
+      link: /
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## What's Here?
+
+<CardGrid stagger>
+  <Card title="Protogen Guides" icon="rocket">
+    Learn how to build and customize Protogen hardware.
+  </Card>
+  <Card title="Software" icon="laptop">
+    Documentation for software projects.
+  </Card>
+  <Card title="Files & Downloads" icon="document">
+    Templates, 3D models, and resources.
+  </Card>
+  <Card title="Community" icon="discord">
+    Join our [Discord](https://discord.gg/YwaWnhJ) for help!
+  </Card>
+</CardGrid>

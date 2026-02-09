@@ -1,0 +1,137 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import Icon from '../components/Icon.astro';
+
+const socialLinks = [
+  { href: 'https://bsky.app/profile/coelacant1.bsky.social', label: 'Bluesky', icon: 'bluesky', username: '@coelacant1.bsky.social' },
+  { href: 'https://twitter.com/coelacant1', label: 'Twitter / X', icon: 'twitter', username: '@coelacant1' },
+  { href: 'https://instagram.com/coelacant1', label: 'Instagram', icon: 'instagram', username: '@coelacant1' },
+  { href: 'https://reddit.com/user/Coelacant1', label: 'Reddit', icon: 'reddit', username: 'u/Coelacant1' },
+  { href: 'https://tiktok.com/@coelacant', label: 'TikTok (Inactive)', icon: 'tiktok', username: '@coelacant' },
+];
+
+const creatorLinks = [
+  { href: 'https://patreon.com/coelacant1', label: 'Patreon', icon: 'patreon', username: 'coelacant1' },
+  { href: 'https://ko-fi.com/coelacant1', label: 'Ko-fi', icon: 'kofi', username: 'coelacant1' },
+  { href: 'https://gumroad.com/coelacant1', label: 'Gumroad', icon: 'gumroad', username: 'coelacant1' },
+  { href: 'https://youtube.com/@Coelacant', label: 'YouTube', icon: 'youtube', username: '@Coelacant' },
+  { href: 'https://soundcloud.com/coelacant', label: 'SoundCloud', icon: 'soundcloud', username: 'coelacant' },
+];
+
+const communityLinks = [
+  { href: 'https://discord.gg/YwaWnhJ', label: 'Discord', icon: 'discord', username: 'Coelacant\'s Fish Tank' },
+  { href: 'https://t.me/coelacant1', label: 'Telegram', icon: 'telegram', username: '@coelacant1' },
+  { href: 'https://t.me/CoelaCantArt', label: 'Telegram Art Channel', icon: 'telegram', username: 'Coelacant Art Channel (18+)' },
+  { href: 'https://github.com/coelacant1', label: 'GitHub', icon: 'github', username: 'coelacant1' },
+];
+---
+
+<BaseLayout title="About - Coela Can't!">
+  <div class="min-h-screen flex flex-col">
+    <SiteHeader />
+
+    <!-- Main Content -->
+    <main class="flex-1 px-4 py-12 max-w-4xl mx-auto w-full">
+      <h1 class="text-4xl md:text-5xl font-bold text-primary mb-4 text-center">
+        About Me
+      </h1>
+      <p class="text-center text-white/70 mb-12 max-w-2xl mx-auto">
+        Hey! I'm Coela, a maker who does art, music, and builds cosplay hardware for the furry community. Here's where you can find me online!
+      </p>
+
+      <!-- Social Media -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-primary mb-6 border-b border-primary/30 pb-2">
+          Social Media
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {socialLinks.map((link) => (
+            <a 
+              href={link.href} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="flex items-center gap-4 p-4 bg-surface/30 border border-primary/20 rounded-xl hover:border-primary/50 hover:bg-surface/50 transition-all group"
+            >
+              <Icon name={link.icon} class="w-8 h-8 text-primary group-hover:scale-110 transition-transform" />
+              <div>
+                <div class="font-semibold text-white">{link.label}</div>
+                <div class="text-sm text-white/50">{link.username}</div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <!-- Creator Platforms -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-primary mb-6 border-b border-primary/30 pb-2">
+          Creator Platforms
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {creatorLinks.map((link) => (
+            <a 
+              href={link.href} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="flex items-center gap-4 p-4 bg-surface/30 border border-primary/20 rounded-xl hover:border-primary/50 hover:bg-surface/50 transition-all group"
+            >
+              <Icon name={link.icon} class="w-8 h-8 text-primary group-hover:scale-110 transition-transform" />
+              <div>
+                <div class="font-semibold text-white">{link.label}</div>
+                <div class="text-sm text-white/50">{link.username}</div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <!-- Community & Dev -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-primary mb-6 border-b border-primary/30 pb-2">
+          Community & Development
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {communityLinks.map((link) => (
+            <a 
+              href={link.href} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="flex items-center gap-4 p-4 bg-surface/30 border border-primary/20 rounded-xl hover:border-primary/50 hover:bg-surface/50 transition-all group"
+            >
+              <Icon name={link.icon} class="w-8 h-8 text-primary group-hover:scale-110 transition-transform" />
+              <div>
+                <div class="font-semibold text-white">{link.label}</div>
+                <div class="text-sm text-white/50">{link.username}</div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section class="bg-surface/30 border border-primary/20 rounded-xl p-8">
+        <h2 class="text-2xl font-bold text-primary mb-4">What I Do</h2>
+        <div class="space-y-4 text-white/70">
+          <p>
+            <strong class="text-primary">Art & Commissions:</strong> I create digital artwork, including YCH (Your Character Here) commissions and custom pieces. Check out my <a href="/commissions" class="text-primary hover:underline">commissions page</a> for current availability!
+          </p>
+          <p>
+            <strong class="text-primary">Music:</strong> I produce remixes and covers of video game music. Listen on <a href="/music" class="text-primary hover:underline">my music page</a> or find me on Youtube and SoundCloud.
+          </p>
+          <p>
+            <strong class="text-primary">Protogen Hardware:</strong> I design and build LED-based Protogen heads with custom electronics. My <a href="https://github.com/coelacant1/ProtoTracer" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">ProtoTracer</a> project is an open-source 3D rendering engine for microcontrollers, for animating displays on Protogen builds.
+          </p>
+          <p>
+            <strong class="text-primary">3D Prints & Files:</strong> I share Protogen head designs and other 3D printable files on Gumroad. Check out my <a href="/protogens" class="text-primary hover:underline">Protogens page</a> for available designs.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-6 text-center text-text-light/50 border-t border-primary/20">
+      © 2026 Coela Can't! All rights reserved.
+    </footer>
+  </div>
+</BaseLayout>

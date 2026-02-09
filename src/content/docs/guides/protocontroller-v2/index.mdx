@@ -1,0 +1,53 @@
+---
+title: Protocontroller V2 Guide
+description: Getting started guide for the Protocontroller V2 LED controller board for Protogen projects
+slug: guides/protocontroller-v2
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+The Protocontroller V2 is a specialized LED controller board designed for Protogen projects, operating with the ProtoTracer codebase.
+
+## Key Features
+
+- **Teensy 4.0 Core**: High-performance microcontroller for complex LED control
+- **HUB75 Support**: Drive HUB75 LED panels with 5V buffered signals
+- **WS2812/APA102**: Support for individually addressable LED strips
+- **I2C Ports**: Five ports with integrated pull-up resistors for sensors
+- **UART**: Serial communication port for ESP32 wireless control
+- **PWM Fan Headers**: Two level-shifted outputs for thermal management
+
+## Guide Sections
+
+<CardGrid>
+  <LinkCard
+    title="Information"
+    description="Overview, features, and limitations of the controller"
+    href="/guides/protocontroller-v2/information/"
+  />
+  <LinkCard
+    title="Schematic"
+    description="Full schematic diagrams and pinout reference"
+    href="/guides/protocontroller-v2/schematic/"
+  />
+  <LinkCard
+    title="Board Layout"
+    description="PCB layout diagrams and copper layer views"
+    href="/guides/protocontroller-v2/board-layout/"
+  />
+  <LinkCard
+    title="Wiring"
+    description="Connector pinouts and general recommendations"
+    href="/guides/protocontroller-v2/wiring/"
+  />
+</CardGrid>
+
+## Programming
+
+For detailed programming instructions, please refer to the [ProtoTracer documentation](/software/prototracer/). The ProtoTracer documentation covers:
+
+- Visual Studio Code and PlatformIO setup
+- Downloading and configuring ProtoTracer
+- WS35 LED Panel configuration
+- HUB75 LED Panel configuration
+- Uploading firmware to the Teensy 4.0

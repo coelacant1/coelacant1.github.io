@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LinkButton from '../components/LinkButton.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import Icon from '../components/Icon.astro';
+import InteractiveLogo from '../components/InteractiveLogo.astro';
+
+const socialLinks = [
+  { href: 'https://bsky.app/profile/coelacant1.bsky.social', label: 'Bluesky', icon: 'bluesky' },
+  { href: 'https://twitter.com/coelacant1', label: 'Twitter / X', icon: 'twitter' },
+  { href: 'https://discord.gg/YwaWnhJ', label: 'Discord', icon: 'discord' },
+  { href: 'https://t.me/coelacant1', label: 'Telegram', icon: 'telegram' },
+  { href: 'https://t.me/CoelaCantArt', label: 'Telegram Art', icon: 'telegram' },
+  { href: 'https://patreon.com/coelacant1', label: 'Patreon', icon: 'patreon' },
+  { href: 'https://ko-fi.com/coelacant1', label: 'Ko-fi', icon: 'kofi' },
+  { href: 'https://soundcloud.com/coelacant', label: 'SoundCloud', icon: 'soundcloud' },
+];
+---
+
+<BaseLayout title="Coela Can't! - Home">
+  <div class="min-h-screen flex flex-col">
+    <SiteHeader />
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col items-center justify-center px-4 py-12">
+      <!-- Interactive Logo -->
+      <div class="mb-4 flex justify-center">
+        <InteractiveLogo />
+      </div>
+
+      <!-- Title & Tagline -->
+      <h1 class="text-4xl md:text-5xl font-bold text-primary mb-2 text-center">
+        Coela Can't!
+      </h1>
+      <p class="text-xl text-accent-1 mb-2 text-center">
+        Dragons, Protogens, Art, and More!
+      </p>
+      <p class="text-text-light/70 mb-8 text-center max-w-md">
+        I do a few things! Art, cosplay hardware, music, and random creative projects.
+        Check out my links below!
+      </p>
+
+      <!-- Social Links -->
+      <div class="flex flex-col gap-4 w-full max-w-md">
+        {socialLinks.map((link) => (
+          <LinkButton href={link.href} label={link.label} icon={link.icon} />
+        ))}
+      </div>
+
+      <!-- Quick Navigation Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-12 w-full max-w-3xl">
+        <a href="/art" class="group p-6 rounded-xl bg-bg-card border border-primary/20 hover:border-primary text-center transition-all hover:scale-[1.02]">
+          <span class="text-3xl mb-2 block text-primary"><Icon name="art" class="w-8 h-8 mx-auto" /></span>
+          <h3 class="text-lg font-semibold text-primary">Art Gallery</h3>
+          <p class="text-sm text-text-light/60">View my artwork</p>
+        </a>
+        <a href="/commissions" class="group p-6 rounded-xl bg-bg-card border border-primary/20 hover:border-primary text-center transition-all hover:scale-[1.02]">
+          <span class="text-3xl mb-2 block text-primary"><Icon name="art" class="w-8 h-8 mx-auto" /></span>
+          <h3 class="text-lg font-semibold text-primary">Commissions</h3>
+          <p class="text-sm text-text-light/60">YCH & custom art</p>
+        </a>
+        <a href="/welcome" class="group p-6 rounded-xl bg-bg-card border border-primary/20 hover:border-primary text-center transition-all hover:scale-[1.02]">
+          <span class="text-3xl mb-2 block text-primary"><Icon name="docs" class="w-8 h-8 mx-auto" /></span>
+          <h3 class="text-lg font-semibold text-primary">Documentation</h3>
+          <p class="text-sm text-text-light/60">Guides & resources</p>
+        </a>
+        <a href="/about" class="group p-6 rounded-xl bg-bg-card border border-primary/20 hover:border-primary text-center transition-all hover:scale-[1.02]">
+          <span class="text-3xl mb-2 block text-primary"><Icon name="heart" class="w-8 h-8 mx-auto" /></span>
+          <h3 class="text-lg font-semibold text-primary">About Me</h3>
+          <p class="text-sm text-text-light/60">Find me online</p>
+        </a>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-6 text-center text-text-light/50 border-t border-primary/20">
+      © 2026 Coela Can't! All rights reserved.
+    </footer>
+  </div>
+</BaseLayout>

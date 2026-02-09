@@ -1,7 +1,0 @@
-ignore_external: true
-checks:
-  - Links
-  - Images
-  - Scripts
-  - Html
-

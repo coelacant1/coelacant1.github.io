@@ -1,0 +1,48 @@
+/* Custom Starlight theme for Coela Can't! */
+:root {
+  --sl-color-accent-low: #87475b;
+  --sl-color-accent: #f8a0c2;
+  --sl-color-accent-high: #ffcddf;
+  --sl-color-white: #fff0f8;
+  --sl-color-gray-1: #f5f5f5;
+  --sl-color-gray-2: #c9c9c9;
+  --sl-color-gray-3: #8b8b8b;
+  --sl-color-gray-4: #585858;
+  --sl-color-gray-5: #383838;
+  --sl-color-gray-6: #1e1e1e;
+  --sl-color-black: #121212;
+  --sl-color-bg: #1c1c1c;
+  --sl-color-bg-nav: #121212;
+  --sl-color-bg-sidebar: #121212;
+}
+
+/* Force dark mode */
+:root[data-theme='light'] {
+  --sl-color-accent-low: #87475b;
+  --sl-color-accent: #f8a0c2;
+  --sl-color-accent-high: #ffcddf;
+}
+
+/* Reset Starlight header wrapper padding */
+.header {
+  padding: 0 !important;
+}
+
+/* Style the "Back to Main Site" sidebar link prominently */
+.sidebar-content > ul > li:first-child > a[href="/"] {
+  display: flex;
+  align-items: center;
+  padding: 0.6rem 1rem !important;
+  margin-bottom: 1rem;
+  background: rgba(248, 160, 194, 0.15);
+  border: 1px solid var(--sl-color-accent);
+  border-radius: 0.5rem;
+  color: var(--sl-color-accent) !important;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.sidebar-content > ul > li:first-child > a[href="/"]:hover {
+  background: rgba(248, 160, 194, 0.3);
+  border-color: var(--sl-color-accent-high);
+}

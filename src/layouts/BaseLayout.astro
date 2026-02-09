@@ -1,0 +1,29 @@
+---
+import '../styles/global.css';
+import ShaderBackground from '../components/ShaderBackground.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Coela Can't! - Dragons, Protogens, Art, and More!" } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen bg-bg-darker text-text-light">
+    <ShaderBackground />
+    <div class="relative z-10">
+      <slot />
+    </div>
+  </body>
+</html>

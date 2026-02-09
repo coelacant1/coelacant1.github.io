@@ -1,97 +1,143 @@
-# Coela Can't Website
+# Coela Can't! Website
 
-[![CI Build](https://github.com/coelacant1/coelacant.github.io/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/coelacant1/coelacant.github.io/actions/workflows/ci.yaml)[![pages-build-deployment](https://github.com/coelacant1/coelacant.github.io/actions/workflows/pages/pages-build-deployment/badge.svg?branch=gh-pages)](https://github.com/coelacant1/coelacant.github.io/actions/workflows/pages/pages-build-deployment)
+My personal website built with [Astro](https://astro.build), [Starlight](https://starlight.astro.build), and [Tailwind CSS](https://tailwindcss.com).
 
+**Live Site:** [coelacant1.github.io](https://coelacant1.github.io)
 
+## Development
 
-Welcome to the repository for [coelacant1.github.io](https://coelacant1.github.io/)—the personal site of **Coela Can't**.
+```bash
+# Install dependencies
+npm install
 
----
+# Start dev server
+npm run dev
 
-## Table of Contents
-- [About the Site](#about-the-site)
-- [Technologies](#technologies)
-- [Local Development](#local-development)
-- [Continuous Integration (CI)](#continuous-integration-ci)
-- [File/Folder Structure](#filefolder-structure)
+# Build for production
+npm run build
 
----
+# Preview production build
+npm run preview
+```
 
-## About the Site
-This GitHub Pages site is a personal website for Coela Can't.
-- Guides on Protogens
-- All social links and contact information 
-- Links to projects
-- Files for Protogens
+## Project Structure
 
----
+```
+src/
+├── components/        # Reusable components
+│   ├── InteractiveLogo.astro  # Animated dragon
+│   ├── ShaderBackground.astro # WebGL hexagon shader
+│   ├── SiteHeader.astro       # Main site navigation
+│   ├── StarlightHeader.astro  # Docs navigation
+│   └── ...
+├── content/docs/      # Starlight documentation pages
+├── layouts/           # Page layouts
+├── pages/             # Main site pages
+│   ├── index.astro    # Home/link tree
+│   ├── art.astro      # Art gallery
+│   ├── videos.astro   # Video gallery
+│   ├── music.astro    # Music player
+│   ├── commissions.astro
+│   ├── protogens.astro
+│   └── about.astro
+└── styles/            # Global and custom styles
+public/
+├── images/
+│   ├── art/           # Artwork images
+│   ├── stickers/      # Sticker images
+│   ├── animations/    # Animated GIFs
+│   └── logo/          # Interactive logo assets
+└── favicon.svg
+```
 
-## Technologies
-- **[Jekyll](https://jekyllrb.com/):** A Ruby-based static site generator used to build GitHub Pages.
-- **[GitHub Actions](https://docs.github.com/en/actions):** Automated workflows to check, build, and deploy the site.
-- **Ruby Gems:** 
-  - [w3c_validators](https://github.com/sparklemotion/w3c_validators) for HTML/CSS validation
-  - [html-proofer](https://github.com/gjtorikian/html-proofer) for link checking
-  - [rubocop](https://rubocop.org/) for Ruby style checks (optional, if you have Ruby code)
-- **Sass/CSS:** The site may use SCSS partials under `_sass/` or similar.
+## Adding Content
+(Notes to self)
 
----
+### Art Gallery
+Add images to the appropriate folder in `public/images/`:
+- `art/` - Full body/half body artwork (named `art-1.jpg`, `art-2.jpg`, etc.)
+- `stickers/` - Sticker artwork
+- `animations/` - Animated GIFs
 
-## Local Development
+Update the arrays in `src/pages/art.astro` with highest numbers first (newest at top).
 
-1. **Clone the Repo**  
-   ```bash
-   git clone https://github.com/coelacant1/coelacant1.github.io.git
-   cd coelacant1.github.io
-   ```
+### Videos
+Update the `musicVideos` and `protogenVideos` arrays in `src/pages/videos.astro` with YouTube video IDs.
 
-2. **Install Dependencies**
-    Make sure you have Ruby installed (version 3.3+ recommended), then run:
-    ```bash
-    gem install bundler
-    bundle install
-    ```
-    This installs all needed gems (Jekyll, etc.).
+### Documentation
+Add markdown files to `src/content/docs/` in the appropriate subdirectory:
+- `guides/` - Protogen and hardware guides
+- `software/` - Software documentation
+- `resources/` - Helpful resources
+- `files/` - Downloads
 
-3. **Build & Serve Locally**
-    ```bash
-    bundle exec jekyll serve
-    ```
+Update `astro.config.mjs` sidebar configuration to include new pages.
 
-4. **Running Tests/Checks**
-    The script/cibuild (or equivalent) may include steps such as:
-    ```bash
-    #!/bin/sh
-    set -e
+**Important notes:**
+- For index pages using Starlight components (`CardGrid`, `LinkCard`), use `.mdx` extension
+- Add a `slug` field in frontmatter matching the sidebar config (e.g., `slug: guides/protocontroller-v1`)
+- Import components after frontmatter: `import { LinkCard, CardGrid } from '@astrojs/starlight/components';`
 
-    # Build the site
-    bundle exec jekyll build
+### Firmware Uploader
+The WebHID firmware uploader is at `/firmware-uploader`. Source: `src/pages/firmware-uploader.astro`. Only works in Chrome/Edge (WebHID requirement).
 
-    # Check for broken links
-    bundle exec htmlproofer ./_site
+## Customization Notes
 
-    # Run RuboCop (if configured)
-    bundle exec rubocop -D
+### Icons
+All SVG icons are in `src/components/Icon.astro` as inline SVG strings. To add a new icon:
+1. Find an SVG icon (24x24 viewBox works best)
+2. Add to the `icons` object with a key name
+3. Use with `<Icon name="youricon" />`
 
-    # Validate HTML/CSS
-    bundle exec script/validate-html
-    ```
+### Interactive Logo
+The animated dragon on the homepage:
+- Component: `src/components/InteractiveLogo.astro`
+- Assets: `public/images/logo/` (body, head, eyes, mouth frames)
+- Tracks mouse movement and has random blinking/animations
 
----
+### Shader Background
+The hexagon WebGL shader:
+- Component: `src/components/ShaderBackground.astro`
+- Disable on specific pages by not including the component
 
-## Continuous Integration (CI)
-GitHub Actions workflow (e.g. ci.yaml):
-- Runs on push or pull_request.
-- Checks out the code, sets up Ruby/Node, installs dependencies, and runs script/cibuild.
-- If the build or validation fails, the workflow reports an error.
+### Starlight Overrides
+Custom Starlight components in `astro.config.mjs`:
+- `ThemeSelect` → `EmptyThemeSelect.astro` (forces dark mode only)
+- `Header` → `StarlightHeader.astro` (custom header with home link)
+- Custom CSS: `src/styles/starlight-custom.css`
 
----
+### Image Organization
+```
+public/images/
+├── art/          # Gallery artwork (art-1.jpg, art-2.jpg, etc.)
+├── stickers/     # Sticker images
+├── animations/   # Animated GIFs
+├── logo/         # Interactive logo sprite assets
+└── guides/       # Documentation images
+    ├── hub75/    # HUB75 guide images (img-000.png, etc.)
+    ├── ws35/     # WS35 guide images
+    └── protocontroller-v2/
+```
 
-## File/Folder Structure
-- _config.yml — Main Jekyll configuration.
-- _sass/ — SCSS partials.
-- _site/ — Generated build output (should not be committed if .gitignore is set).
-- assets/ — Images, stylesheets, JavaScript, etc.
-- script/ — Custom scripts (e.g., cibuild, validate-html).
-- ci.yaml (in .github/workflows/) — The GitHub Actions workflow definition.
-- Gemfile — Ruby dependencies.
+## Common Screw Ups
+
+- **Sidebar slug errors**: Make sure the `slug` in frontmatter matches exactly what's in `astro.config.mjs`
+- **Components in markdown**: Must use `.mdx` extension, not `.md`
+- **Image paths in docs**: Use absolute paths from public (e.g., `/images/guides/hub75/img-000.png`)
+- **Dev server cache**: If changes don't appear, try stopping dev server and deleting `.astro` folder
+
+## Deployment
+
+This site is configured for GitHub Pages. Push to the `main` branch and the site will automatically deploy via GitHub Actions.
+
+## Tech Stack
+
+- [Astro](https://astro.build) - Static site generator
+- [Starlight](https://starlight.astro.build) - Documentation theme
+- [Tailwind CSS](https://tailwindcss.com) - Styling
+- WebGL - Shader background effects
+- GitHub Pages - Hosting
+
+## License
+
+This project is licensed under the [GNU General Public License v3.0](LICENSE).

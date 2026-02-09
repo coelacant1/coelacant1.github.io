@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import Icon from '../components/Icon.astro';
+
+// Music videos
+const musicVideos = [
+  { id: 'xe2m6Bz-sRM', title: 'Music Video' },
+  { id: 'ptLWq6srIWc', title: 'Music Video' },
+  { id: 'z3LJ-uRfn90', title: 'Music Video' },
+  { id: 'OtThVetFNP4', title: 'Music Video' },
+  { id: 'yBeDbf9WVkE', title: 'Music Video' },
+  { id: 'a32GJvlV00A', title: 'Music Video' },
+];
+
+// Protogen videos
+const protogenVideos = [
+  { id: 'orijCE6EDM4', title: 'Protogen Video' },
+  { id: 'ZJqEkMUVPH4', title: 'Protogen Video' },
+  { id: 'ucIHCd_vjGA', title: 'Protogen Video' },
+  { id: 'TnoXMWCxYpc', title: 'Protogen Video' },
+  { id: 'Yc67nFJwqYo', title: 'Protogen Video' },
+  { id: 'SXp2C7LbiRM', title: 'Protogen Video' },
+  { id: '1AH0N9evXL4', title: 'Protogen Video' },
+  { id: '8uSgCMLcty8', title: 'Protogen Video' },
+  { id: 'C5WwMnbaJ34', title: 'Protogen Video' },
+  { id: 'xQfBLp0Ws1g', title: 'Protogen Video' },
+  { id: 'ii_2rAg5L5c', title: 'Protogen Video' },
+  { id: '960nDUkicEE', title: 'Protogen Video' },
+  { id: 'u2CADiNy3Wo', title: 'Protogen Video' },
+  { id: 'dfjvdJtsRFg', title: 'Protogen Video' },
+  { id: 'CoMETUpcQyA', title: 'Protogen Video' },
+  { id: 'cp83inwCs3M', title: 'Protogen Video' },
+  { id: 'h3FrI2zM1bI', title: 'Protogen Video' },
+  { id: 'bU4lSFczVpw', title: 'Protogen Video' },
+  { id: 'Xh3eKCqLIPc', title: 'Protogen Video' },
+  { id: '8PgzrYZm6BE', title: 'Protogen Video' },
+];
+---
+
+<BaseLayout title="Videos - Coela Can't!">
+  <div class="min-h-screen flex flex-col">
+    <SiteHeader />
+
+    <main class="flex-1 px-4 py-12">
+      <div class="max-w-6xl mx-auto">
+        <h1 class="text-4xl font-bold text-primary mb-2 text-center flex items-center justify-center gap-3">
+          <Icon name="video" class="w-10 h-10" /> Videos
+        </h1>
+        <p class="text-text-light/70 mb-8 text-center">
+          Check out my music videos for my remixes and some examples of my Protogen builds/animations!
+        </p>
+
+        <!-- Music Videos Section -->
+        <h2 class="text-2xl font-bold text-primary mb-6">Music Videos</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+          {musicVideos.map((video) => (
+            <div class="rounded-xl bg-bg-card border border-primary/20 overflow-hidden">
+              <div class="aspect-video">
+                <iframe
+                  src={`https://www.youtube.com/embed/${video.id}`}
+                  title={video.title}
+                  class="w-full h-full"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Protogen Videos Section -->
+        <h2 class="text-2xl font-bold text-primary mb-6">Protogen Videos</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {protogenVideos.map((video) => (
+            <div class="rounded-xl bg-bg-card border border-primary/20 overflow-hidden">
+              <div class="aspect-video">
+                <iframe
+                  src={`https://www.youtube.com/embed/${video.id}`}
+                  title={video.title}
+                  class="w-full h-full"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </main>
+
+    <footer class="py-6 text-center text-text-light/50 border-t border-primary/20">
+      © 2026 Coela Can't! All rights reserved.
+    </footer>
+  </div>
+</BaseLayout>

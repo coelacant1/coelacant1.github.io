@@ -1,0 +1,20 @@
+{
+  "name": "coelacant1-website",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "^0.37.6",
+    "@tailwindcss/vite": "^4.1.18",
+    "astro": "^5.6.1",
+    "jszip": "^3.10.1",
+    "sharp": "^0.34.2",
+    "tailwindcss": "^4.1.18"
+  }
+}

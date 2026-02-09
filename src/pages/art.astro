@@ -1,0 +1,163 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import Icon from '../components/Icon.astro';
+import Lightbox from '../components/Lightbox.astro';
+
+// Full body/half body artwork, ordered newest first (highest number)
+const artworks = [
+  { src: '/images/art/art-22.jpg', title: 'Coela Avali' },
+  { src: '/images/art/art-21.jpg', title: 'Coela and Tuna c:' },
+  { src: '/images/art/art-20.jpg', title: 'Coela Tickle' },
+  { src: '/images/art/art-19.jpg', title: 'Coela Hoodie Pose' },
+  { src: '/images/art/art-18.jpg', title: 'Coela Booty' },
+  { src: '/images/art/art-17.jpg', title: 'Mltn' },
+  { src: '/images/art/art-16.jpg', title: 'Hertzz in Finals' },
+  { src: '/images/art/art-15.jpg', title: 'Techied' },
+  { src: '/images/art/art-14.jpg', title: 'Coela Tummy' },
+  { src: '/images/art/art-13.jpg', title: 'Coela Halloween' },
+  { src: '/images/art/art-12.jpg', title: 'Mystic Halloween' },
+  { src: '/images/art/art-11.jpg', title: 'Hertzz PFP' },
+  { src: '/images/art/art-10.jpg', title: 'Coela Booty 2' },
+  { src: '/images/art/art-9.jpg', title: 'Bitty Kitty (Bitstream)' },
+  { src: '/images/art/art-8.jpg', title: 'Coela NITW' },
+  { src: '/images/art/art-7.jpg', title: 'Coela Bed' },
+  { src: '/images/art/art-6.jpg', title: 'Sweet and Jonelvis' },
+  { src: '/images/art/art-5.jpg', title: 'Hertzz Couch' },
+  { src: '/images/art/art-4.jpg', title: 'Loona' },
+  { src: '/images/art/art-3.jpg', title: 'Hertzz Half Body' },
+  { src: '/images/art/art-2.jpg', title: 'Coela Paws' },
+  { src: '/images/art/art-1.jpg', title: 'Coela Fluffy' },
+];
+
+// Stickers, ordered newest first
+const stickers = [
+  { src: '/images/stickers/sticker-6.jpg', title: 'Coela Sad' },
+  { src: '/images/stickers/sticker-5.jpg', title: 'Hertzz and Coela Hug' },
+  { src: '/images/stickers/sticker-4.jpg', title: 'Coela Surprise' },
+  { src: '/images/stickers/sticker-3.jpg', title: 'Coela Lick' },
+  { src: '/images/stickers/sticker-2.jpg', title: 'Coela Butt' },
+  { src: '/images/stickers/sticker-1.jpg', title: 'Coela Angy' },
+];
+
+// Animations, ordered newest first
+const animations = [
+  { src: '/images/animations/gif-animation-2.gif', title: 'Hertzz Chomp' },
+  { src: '/images/animations/gif-animation-1.gif', title: 'Hertzz Chomp Edit' },
+  { src: '/images/animations/gif-animation-16.gif', title: 'Coela Nerd' },
+  { src: '/images/animations/gif-animation-15.gif', title: 'Coela Blep' },
+  { src: '/images/animations/gif-animation-14.gif', title: 'Coela Peek Blep' },
+  { src: '/images/animations/gif-animation-13.gif', title: 'Coela Peek' },
+  { src: '/images/animations/gif-animation-12.gif', title: 'Coela Sad' },
+  { src: '/images/animations/gif-animation-11.gif', title: 'Coela Stop' },
+  { src: '/images/animations/gif-animation-10.gif', title: 'Coela Angy' },
+  { src: '/images/animations/gif-animation-9.gif', title: 'Coela Bonk' },
+  { src: '/images/animations/gif-animation-8.gif', title: 'Coela Interest' },
+  { src: '/images/animations/gif-animation-7.gif', title: 'Coela Steppies' },
+  { src: '/images/animations/gif-animation-6.gif', title: 'Coela Derp' },
+  { src: '/images/animations/gif-animation-5.gif', title: 'Coela Notifications' },
+  { src: '/images/animations/gif-animation-4.gif', title: 'Coela Reverse' },
+];
+---
+
+<BaseLayout title="Art Gallery - Coela Can't!">
+  <div class="min-h-screen flex flex-col">
+    <SiteHeader />
+
+    <main class="flex-1 px-4 py-12">
+      <div class="max-w-6xl mx-auto">
+        <h1 class="text-4xl font-bold text-primary mb-2 text-center flex items-center justify-center gap-3">
+          <Icon name="art" class="w-10 h-10" /> Art Gallery
+        </h1>
+        <p class="text-text-light/70 mb-4 text-center">
+          Check out my artwork! Click to expand.
+        </p>
+        <p class="text-text-light/60 mb-8 text-center text-sm">
+          Art posts go up on <a href="https://twitter.com/coelacant1" class="text-primary hover:underline">X</a> and 
+          <a href="https://bsky.app/profile/coelacant1.bsky.social" class="text-primary hover:underline">Bluesky</a>. 
+          NSFW content is only posted on <a href="https://t.me/CoelaCantArt" class="text-primary hover:underline">Telegram</a>.
+        </p>
+
+        <!-- Full Body / Half Body Art Section -->
+        <h2 class="text-2xl font-bold text-primary mb-6 mt-4">Full Body / Half Body Art</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {artworks.map((art) => (
+            <div 
+              class="group relative overflow-hidden rounded-xl bg-bg-card border border-primary/20 hover:border-primary transition-all cursor-pointer"
+              data-lightbox={art.src}
+              data-title={art.title}
+            >
+              <img
+                src={art.src}
+                alt={art.title}
+                class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-bg-darker/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                <div class="absolute bottom-0 left-0 right-0 p-4">
+                  <h3 class="text-lg font-semibold text-primary">{art.title}</h3>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Stickers Section -->
+        <h2 class="text-2xl font-bold text-primary mb-6 mt-12">Stickers</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+          {stickers.map((sticker) => (
+            <div 
+              class="group relative overflow-hidden rounded-xl bg-bg-card border border-primary/20 hover:border-primary transition-all cursor-pointer"
+              data-lightbox={sticker.src}
+              data-title={sticker.title}
+            >
+              <img
+                src={sticker.src}
+                alt={sticker.title}
+                class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-bg-darker/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                <div class="absolute bottom-0 left-0 right-0 p-4">
+                  <h3 class="text-lg font-semibold text-primary">{sticker.title}</h3>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Animations Section -->
+        <h2 class="text-2xl font-bold text-primary mb-6 mt-12">Animations</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {animations.map((anim) => (
+            <div 
+              class="group relative overflow-hidden rounded-xl bg-bg-card border border-primary/20 hover:border-primary transition-all cursor-pointer"
+              data-lightbox={anim.src}
+              data-title={anim.title}
+            >
+              <img
+                src={anim.src}
+                alt={anim.title}
+                class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-bg-darker/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                <div class="absolute bottom-0 left-0 right-0 p-4">
+                  <h3 class="text-lg font-semibold text-primary">{anim.title}</h3>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+
+      </div>
+    </main>
+
+    <footer class="py-6 text-center text-text-light/50 border-t border-primary/20">
+      © 2026 Coela Can't! All rights reserved.
+    </footer>
+  </div>
+  
+  <Lightbox />
+</BaseLayout>

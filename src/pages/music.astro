@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import Icon from '../components/Icon.astro';
+
+const tracks = [
+  {
+    title: "Animal Crossing: New Horizons - K.K. Cruisin' Remix",
+    embedUrl: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A803576296&color=%23f8a0c2&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true',
+  },
+  {
+    title: 'DELTARUNE - The Legend/Empty Town Orchestral Remix',
+    embedUrl: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A526551810&color=%23f8a0c2&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true',
+  },
+  {
+    title: 'Lena Raine - Pigstep Remix',
+    embedUrl: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A805094674&color=%23f8a0c2&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true',
+  },
+  {
+    title: 'DELTARUNE - Rude Buster! Remix',
+    embedUrl: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A524758920&color=%23f8a0c2&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true',
+  },
+];
+---
+
+<BaseLayout title="Music - Coela Can't!">
+  <div class="min-h-screen flex flex-col">
+    <SiteHeader />
+
+    <main class="flex-1 px-4 py-12">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl font-bold text-primary mb-2 text-center flex items-center justify-center gap-3">
+          <Icon name="music" class="w-10 h-10" /> Music
+        </h1>
+        <p class="text-text-light/70 mb-8 text-center">
+          Video game covers, remixes, and original tracks!
+        </p>
+
+        <!-- SoundCloud Profile Link -->
+        <div class="bg-bg-card border border-primary/20 rounded-xl p-6 mb-8">
+          <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
+            <div>
+              <h2 class="text-xl font-semibold text-primary mb-1">Full SoundCloud Profile</h2>
+              <p class="text-text-light/60">Listen to all my tracks and follow for updates</p>
+            </div>
+            <a 
+              href="https://soundcloud.com/coelacant"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-2 px-5 py-3 bg-bg-dark rounded-lg border border-primary/30 hover:border-primary hover:bg-primary/10 transition-all whitespace-nowrap"
+            >
+              <Icon name="soundcloud" class="w-5 h-5 text-primary" />
+              <span class="text-text-light font-medium">Visit SoundCloud</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- SoundCloud Embeds -->
+        <div class="space-y-6">
+          {tracks.map((track) => (
+            <div class="rounded-xl bg-bg-card border border-primary/20 overflow-hidden p-4">
+              <h3 class="text-lg font-semibold text-primary mb-4">{track.title}</h3>
+              <iframe
+                width="100%"
+                height="300"
+                scrolling="no"
+                frameborder="no"
+                allow="autoplay"
+                src={track.embedUrl}
+                class="rounded-lg"
+              ></iframe>
+            </div>
+          ))}
+        </div>
+      </div>
+    </main>
+
+    <footer class="py-6 text-center text-text-light/50 border-t border-primary/20">
+      © 2026 Coela Can't! All rights reserved.
+    </footer>
+  </div>
+</BaseLayout>

@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import Icon from '../components/Icon.astro';
+
+const designs = [
+  {
+    name: 'Coela Sigma Protogen',
+    url: 'https://coelacant1.gumroad.com/l/SigmaProtogenV1',
+    description: 'The latest design, built in cooling, printable in TPU, lightweight, and easy to print. (I recommend this for all new builds)',
+  },
+  {
+    name: 'Coela Epsilon Protogen',
+    url: 'https://coelacant1.gumroad.com/l/coelaepsilonprotogenv1',
+    description: 'The third design release, very hard to print, difficult visor to cut, but all based on visuals.',
+  },
+  {
+    name: 'Coela Delta Protogen',
+    url: 'https://coelacant1.gumroad.com/l/coeladeltaprotogenv1',
+    description: 'The second released build, reasonable to print, a bit of a challenge to build.',
+  },
+  {
+    name: 'Coela Beta Protogen',
+    url: 'https://coelacant1.gumroad.com/l/coelaprotogenv1',
+    description: 'My first released Protogen build - runs a bit small.',
+  },
+];
+---
+
+<BaseLayout title="Protogens - Coela Can't!">
+  <div class="min-h-screen flex flex-col">
+    <SiteHeader />
+
+    <!-- Main Content -->
+    <main class="flex-1 px-4 py-12">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl font-bold text-primary mb-4 text-center">Protogens</h1>
+        <p class="text-text-light/70 mb-8 text-center max-w-2xl mx-auto">
+          Everything Protogen! From the animation engine to 3D printable designs.
+        </p>
+
+        <!-- ProtoTracer Section -->
+        <div class="pt-8 border-t border-primary/20">
+          <h2 class="text-3xl font-bold text-primary mb-4 text-center">ProtoTracer</h2>
+          <p class="text-text-light/70 mb-6 text-center max-w-2xl mx-auto">
+            ProtoTracer is a real-time 3D rendering and animation engine designed for microcontrollers.
+            It powers the animated LED displays on many Protogen builds!
+          </p>
+          
+          <div class="bg-bg-card border border-primary/20 rounded-xl p-6">
+            <div class="flex flex-col md:flex-row gap-6 items-start">
+              <div class="flex-1">
+                <h3 class="text-xl font-semibold text-primary mb-2">Features</h3>
+                <ul class="text-text-light/70 space-y-1 list-disc list-inside">
+                  <li>Real-time 3D rendering on Teensy 4.0/4.1</li>
+                  <li>Support for 64x32 HUB75 panels</li>
+                  <li>WS2812B LED support (WS35 Boards)</li>
+                  <li>OBJ file rendering with textures</li>
+                  <li>Animation engine with effects</li>
+                </ul>
+              </div>
+              <div class="flex-1">
+                <h3 class="text-xl font-semibold text-primary mb-2">Resources</h3>
+                <div class="space-y-2">
+                  <a 
+                    href="https://github.com/coelacant1/ProtoTracer"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex items-center gap-2 px-4 py-2 bg-bg-dark rounded-lg border border-primary/30 hover:border-primary transition-all"
+                  >
+                    <Icon name="github" class="w-5 h-5 text-primary" />
+                    <span class="text-text-light">GitHub Repository</span>
+                  </a>
+                  <a 
+                    href="https://coelacant1.github.io/ProtoTracer/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex items-center gap-2 px-4 py-2 bg-bg-dark rounded-lg border border-primary/30 hover:border-primary transition-all"
+                  >
+                    <Icon name="docs" class="w-5 h-5 text-primary" />
+                    <span class="text-text-light">Full Documentation</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Protogen Designs Section -->
+        <div class="mt-12 pt-8 border-t border-primary/20">
+          <h2 class="text-3xl font-bold text-primary mb-4 text-center">Protogen Designs</h2>
+          <p class="text-text-light/70 mb-8 text-center max-w-2xl mx-auto">
+            3D printable Protogen head designs available on Gumroad. Each design includes STL files,
+             and electronics documentation. Check out the <a href="/welcome" class="text-primary hover:underline">Documentation</a> for available guides!
+          </p>
+
+          <!-- Gumroad Embeds -->
+          <div class="space-y-8">
+            {designs.map((design) => (
+              <div class="bg-bg-card border border-primary/20 rounded-xl p-6 hover:border-primary transition-all">
+                <h2 class="text-2xl font-semibold text-primary mb-2">{design.name}</h2>
+                <p class="text-text-light/60 mb-4">{design.description}</p>
+                <div class="gumroad-product-embed">
+                  <a href={design.url} class="text-primary hover:underline">View on Gumroad</a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Back to Home -->
+        <div class="mt-12 text-center">
+          <a href="/" class="text-primary hover:underline">← Back to Home</a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-6 text-center text-text-light/50 border-t border-primary/20">
+      © 2026 Coela Can't! All rights reserved.
+    </footer>
+  </div>
+
+  <!-- Gumroad Embed Script -->
+  <script src="https://gumroad.com/js/gumroad-embed.js" is:inline></script>
+</BaseLayout>

@@ -1,0 +1,27 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  href: string;
+  icon?: string;
+  label: string;
+}
+
+const { href, icon, label } = Astro.props;
+---
+
+<a
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="group flex items-center gap-4 w-full max-w-md px-6 py-4 rounded-xl bg-bg-card border-2 border-primary/30 hover:border-primary hover:bg-primary/10 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-primary/20"
+>
+  {icon && (
+    <span class="text-primary group-hover:scale-110 transition-transform">
+      <Icon name={icon} class="w-6 h-6" />
+    </span>
+  )}
+  <span class="text-lg font-medium text-text-light group-hover:text-primary transition-colors">
+    {label}
+  </span>
+</a>
