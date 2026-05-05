@@ -2,17 +2,18 @@
 import Search from '@astrojs/starlight/components/Search.astro';
 import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro';
 import SocialIcons from '@astrojs/starlight/components/SocialIcons.astro';
+import { features } from '../config/features';
 
 const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '/art', label: 'Art' },
-  { href: '/commissions', label: 'Commissions' },
+  { href: '/art', label: 'Art', feature: 'art' as const },
+  { href: '/commissions', label: 'Commissions', feature: 'commissions' as const },
   { href: '/welcome', label: 'Docs' },
   { href: '/protogens', label: 'Protogens' },
   { href: '/videos', label: 'Videos' },
   { href: '/music', label: 'Music' },
   { href: '/about', label: 'About' },
-];
+].filter((l) => !l.feature || features[l.feature]);
 
 const socialLinks = [
   { href: 'https://discord.gg/YwaWnhJ', icon: 'discord', label: 'Discord' },

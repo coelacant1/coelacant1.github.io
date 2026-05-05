@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import ShaderBackground from '../components/ShaderBackground.astro';
+import { features } from '../config/features';
 
 interface Props {
   title: string;
@@ -21,7 +22,7 @@ const { title, description = "Coela Can't! - Dragons, Protogens, Art, and More!"
     <title>{title}</title>
   </head>
   <body class="min-h-screen bg-bg-darker text-text-light">
-    <ShaderBackground />
+    {features.shaderBackground && <ShaderBackground />}
     <div class="relative z-10">
       <slot />
     </div>

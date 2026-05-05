@@ -6,16 +6,18 @@ interface Props {
 
 const { showSearch = false } = Astro.props;
 
+import { features } from '../config/features';
+
 const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '/art', label: 'Art' },
-  { href: '/commissions', label: 'Commissions' },
+  { href: '/art', label: 'Art', feature: 'art' as const },
+  { href: '/commissions', label: 'Commissions', feature: 'commissions' as const },
   { href: '/welcome', label: 'Docs' },
   { href: '/protogens', label: 'Protogens' },
   { href: '/videos', label: 'Videos' },
   { href: '/music', label: 'Music' },
   { href: '/about', label: 'About' },
-];
+].filter((l) => !l.feature || features[l.feature]);
 
 const socialLinks = [
   { href: 'https://discord.gg/YwaWnhJ', icon: 'discord', label: 'Discord' },
@@ -124,7 +126,6 @@ const icons: Record<string, string> = {
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding-right: 2.5rem; /* Space for shader toggle button */
   }
   
   .social-icons {

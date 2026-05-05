@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import Icon from '../components/Icon.astro';
+import { features } from '../config/features';
 
 const socialLinks = [
   { href: 'https://bsky.app/profile/coelacant1.bsky.social', label: 'Bluesky', icon: 'bluesky', username: '@coelacant1.bsky.social' },
@@ -12,19 +13,19 @@ const socialLinks = [
 ];
 
 const creatorLinks = [
-  { href: 'https://patreon.com/coelacant1', label: 'Patreon', icon: 'patreon', username: 'coelacant1' },
+  { href: 'https://patreon.com/coelacant1', label: 'Patreon', icon: 'patreon', username: 'coelacant1', feature: 'patreon' as const },
   { href: 'https://ko-fi.com/coelacant1', label: 'Ko-fi', icon: 'kofi', username: 'coelacant1' },
   { href: 'https://gumroad.com/coelacant1', label: 'Gumroad', icon: 'gumroad', username: 'coelacant1' },
   { href: 'https://youtube.com/@Coelacant', label: 'YouTube', icon: 'youtube', username: '@Coelacant' },
   { href: 'https://soundcloud.com/coelacant', label: 'SoundCloud', icon: 'soundcloud', username: 'coelacant' },
-];
+].filter((l) => !l.feature || features[l.feature]);
 
 const communityLinks = [
   { href: 'https://discord.gg/YwaWnhJ', label: 'Discord', icon: 'discord', username: 'Coelacant\'s Fish Tank' },
   { href: 'https://t.me/coelacant1', label: 'Telegram', icon: 'telegram', username: '@coelacant1' },
-  { href: 'https://t.me/CoelaCantArt', label: 'Telegram Art Channel', icon: 'telegram', username: 'Coelacant Art Channel (18+)' },
+  { href: 'https://t.me/CoelaCantArt', label: 'Telegram Art Channel', icon: 'telegram', username: 'Coelacant Art Channel (18+)', feature: 'telegramArt' as const },
   { href: 'https://github.com/coelacant1', label: 'GitHub', icon: 'github', username: 'coelacant1' },
-];
+].filter((l) => !l.feature || features[l.feature]);
 ---
 
 <BaseLayout title="About - Coela Can't!">
@@ -113,9 +114,11 @@ const communityLinks = [
       <section class="bg-surface/30 border border-primary/20 rounded-xl p-8">
         <h2 class="text-2xl font-bold text-primary mb-4">What I Do</h2>
         <div class="space-y-4 text-white/70">
-          <p>
-            <strong class="text-primary">Art & Commissions:</strong> I create digital artwork, including YCH (Your Character Here) commissions and custom pieces. Check out my <a href="/commissions" class="text-primary hover:underline">commissions page</a> for current availability!
-          </p>
+          {(features.art || features.commissions) && (
+            <p>
+              <strong class="text-primary">Art & Commissions:</strong> I create digital artwork, including YCH (Your Character Here) commissions and custom pieces.{features.commissions ? (<> Check out my <a href="/commissions" class="text-primary hover:underline">commissions page</a> for current availability!</>) : ''}
+            </p>
+          )}
           <p>
             <strong class="text-primary">Music:</strong> I produce remixes and covers of video game music. Listen on <a href="/music" class="text-primary hover:underline">my music page</a> or find me on Youtube and SoundCloud.
           </p>

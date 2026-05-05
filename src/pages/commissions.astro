@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import Lightbox from '../components/Lightbox.astro';
+import { features } from '../config/features';
 
 // YCH Examples (blank template + finished examples)
 const ychExamples = [
@@ -39,7 +40,15 @@ const ychExamples = [
   <div class="min-h-screen flex flex-col">
     <SiteHeader />
 
-    <!-- Main Content -->
+    {!features.commissions ? (
+      <main class="flex-1 px-4 py-24 flex items-center justify-center">
+        <div class="max-w-xl text-center bg-surface/30 border border-primary/20 rounded-xl p-10">
+          <h1 class="text-3xl md:text-4xl font-bold text-primary mb-4">Commissions — Coming Soon</h1>
+          <p class="text-white/70">Commissions are temporarily unavailable. Please check back soon for updated availability!</p>
+          <a href="/" class="inline-block mt-6 px-5 py-2 rounded-lg bg-primary/20 border border-primary/40 text-primary hover:bg-primary/30 transition-colors">← Back to Home</a>
+        </div>
+      </main>
+    ) : (
     <main class="flex-1 px-4 py-12 max-w-6xl mx-auto w-full">
       <h1 class="text-4xl md:text-5xl font-bold text-primary mb-4 text-center">
         Commissions
@@ -215,6 +224,7 @@ const ychExamples = [
         </ul>
       </section>
     </main>
+    )}
 
     <!-- Footer -->
     <footer class="py-6 text-center text-text-light/50 border-t border-primary/20">

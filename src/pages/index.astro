@@ -4,17 +4,27 @@ import LinkButton from '../components/LinkButton.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import Icon from '../components/Icon.astro';
 import InteractiveLogo from '../components/InteractiveLogo.astro';
+import { features } from '../config/features';
+
+const quickNavCards = [
+  { href: '/art', icon: 'art', title: 'Art Gallery', desc: 'View my artwork', feature: 'art' as const },
+  { href: '/commissions', icon: 'art', title: 'Commissions', desc: 'YCH & custom art', feature: 'commissions' as const },
+  { href: '/welcome', icon: 'docs', title: 'Documentation', desc: 'Guides & resources' },
+  { href: '/about', icon: 'heart', title: 'About Me', desc: 'Find me online' },
+].filter((c) => !c.feature || features[c.feature]);
+
+const cardCols = quickNavCards.length >= 4 ? 'md:grid-cols-4' : quickNavCards.length === 3 ? 'md:grid-cols-3' : 'md:grid-cols-2';
 
 const socialLinks = [
   { href: 'https://bsky.app/profile/coelacant1.bsky.social', label: 'Bluesky', icon: 'bluesky' },
   { href: 'https://twitter.com/coelacant1', label: 'Twitter / X', icon: 'twitter' },
   { href: 'https://discord.gg/YwaWnhJ', label: 'Discord', icon: 'discord' },
   { href: 'https://t.me/coelacant1', label: 'Telegram', icon: 'telegram' },
-  { href: 'https://t.me/CoelaCantArt', label: 'Telegram Art', icon: 'telegram' },
-  { href: 'https://patreon.com/coelacant1', label: 'Patreon', icon: 'patreon' },
+  { href: 'https://t.me/CoelaCantArt', label: 'Telegram Art', icon: 'telegram', feature: 'telegramArt' as const },
+  { href: 'https://patreon.com/coelacant1', label: 'Patreon', icon: 'patreon', feature: 'patreon' as const },
   { href: 'https://ko-fi.com/coelacant1', label: 'Ko-fi', icon: 'kofi' },
   { href: 'https://soundcloud.com/coelacant', label: 'SoundCloud', icon: 'soundcloud' },
-];
+].filter((l) => !l.feature || features[l.feature]);
 ---
 
 <BaseLayout title="Coela Can't! - Home">
@@ -48,27 +58,14 @@ const socialLinks = [
       </div>
 
       <!-- Quick Navigation Cards -->
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-12 w-full max-w-3xl">
-        <a href="/art" class="group p-6 rounded-xl bg-bg-card border border-primary/20 hover:border-primary text-center transition-all hover:scale-[1.02]">
-          <span class="text-3xl mb-2 block text-primary"><Icon name="art" class="w-8 h-8 mx-auto" /></span>
-          <h3 class="text-lg font-semibold text-primary">Art Gallery</h3>
-          <p class="text-sm text-text-light/60">View my artwork</p>
-        </a>
-        <a href="/commissions" class="group p-6 rounded-xl bg-bg-card border border-primary/20 hover:border-primary text-center transition-all hover:scale-[1.02]">
-          <span class="text-3xl mb-2 block text-primary"><Icon name="art" class="w-8 h-8 mx-auto" /></span>
-          <h3 class="text-lg font-semibold text-primary">Commissions</h3>
-          <p class="text-sm text-text-light/60">YCH & custom art</p>
-        </a>
-        <a href="/welcome" class="group p-6 rounded-xl bg-bg-card border border-primary/20 hover:border-primary text-center transition-all hover:scale-[1.02]">
-          <span class="text-3xl mb-2 block text-primary"><Icon name="docs" class="w-8 h-8 mx-auto" /></span>
-          <h3 class="text-lg font-semibold text-primary">Documentation</h3>
-          <p class="text-sm text-text-light/60">Guides & resources</p>
-        </a>
-        <a href="/about" class="group p-6 rounded-xl bg-bg-card border border-primary/20 hover:border-primary text-center transition-all hover:scale-[1.02]">
-          <span class="text-3xl mb-2 block text-primary"><Icon name="heart" class="w-8 h-8 mx-auto" /></span>
-          <h3 class="text-lg font-semibold text-primary">About Me</h3>
-          <p class="text-sm text-text-light/60">Find me online</p>
-        </a>
+      <div class={`grid grid-cols-1 ${cardCols} gap-4 mt-12 w-full max-w-3xl`}>
+        {quickNavCards.map((card) => (
+          <a href={card.href} class="group p-6 rounded-xl bg-bg-card border border-primary/20 hover:border-primary text-center transition-all hover:scale-[1.02]">
+            <span class="text-3xl mb-2 block text-primary"><Icon name={card.icon} class="w-8 h-8 mx-auto" /></span>
+            <h3 class="text-lg font-semibold text-primary">{card.title}</h3>
+            <p class="text-sm text-text-light/60">{card.desc}</p>
+          </a>
+        ))}
       </div>
     </main>
 
